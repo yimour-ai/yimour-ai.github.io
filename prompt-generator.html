@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مولد البرومبتات - عالم الذكاء الاصطناعي</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+}
+
+header {
+    background: white;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+nav a {
+    margin: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.container {
+    margin: 30px auto;
+    width: 90%;
+    max-width: 800px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ddd;
+}
+
+h1 {
+    color: #2563eb;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    background: white;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+@media (max-width: 600px) {
+    .row { grid-template-columns: 1fr; }
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+#result-box {
+    display: none;
+    margin-top: 25px;
+    padding: 18px;
+    background: #f0f4ff;
+    border: 1px solid #c7d6fb;
+    border-radius: 10px;
+}
+
+#result-box h3 {
+    margin-top: 0;
+    color: #2563eb;
+}
+
+#result-text {
+    white-space: pre-wrap;
+    line-height: 1.9;
+    color: #222;
+}
+
+#copy-btn {
+    background: #16a34a;
+}
+
+#copy-btn:hover {
+    background: #15803d;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="prompt-generator.html">مولد البرومبتات</a>
+<a href="prompt-library.html">مكتبة البرومبتات</a>
+</nav>
+</header>
+
+<div class="container">
+<h1>مولد البرومبتات بالذكاء الاصطناعي</h1>
+
+<p>اكتب فكرة البرومبت الخاص بك، وحدد الخيارات، وسيتم تحويلها تلقائيًا إلى برومبت منظم واحترافي جاهز للاستخدام.</p>
+
+<textarea id="idea" placeholder="مثلا: أريد إنشاء صورة لمدينة مستقبلية..."></textarea>
+
+<div class="row">
+    <div>
+        <label for="role">دور الذكاء الاصطناعي</label>
+        <select id="role">
+            <option value="كاتب محتوى محترف">كاتب محتوى محترف</option>
+            <option value="مصمم مطالبات (Prompt) للصور">مصمم مطالبات للصور</option>
+            <option value="مسوّق رقمي">مسوّق رقمي</option>
+            <option value="مطوّر برمجيات">مطوّر برمجيات</option>
+            <option value="مساعد بحث تعليمي">مساعد بحث تعليمي</option>
+        </select>
+    </div>
+    <div>
+        <label for="tone">النبرة</label>
+        <select id="tone">
+            <option value="احترافية وواضحة">احترافية وواضحة</option>
+            <option value="ودية وبسيطة">ودية وبسيطة</option>
+            <option value="إبداعية وخيالية">إبداعية وخيالية</option>
+            <option value="مقنعة وتسويقية">مقنعة وتسويقية</option>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div>
+        <label for="length">طول الناتج</label>
+        <select id="length">
+            <option value="قصير (فقرة واحدة)">قصير (فقرة واحدة)</option>
+            <option value="متوسط">متوسط</option>
+            <option value="مفصّل وطويل">مفصّل وطويل</option>
+        </select>
+    </div>
+    <div>
+        <label for="format">صيغة الإخراج</label>
+        <select id="format">
+            <option value="نص متصل">نص متصل</option>
+            <option value="نقاط مرقمة">نقاط مرقمة</option>
+            <option value="جدول">جدول</option>
+        </select>
+    </div>
+</div>
+
+<button onclick="generatePrompt()">إنشاء البرومبت</button>
+
+<div id="result-box">
+    <h3>✅ البرومبت الجاهز</h3>
+    <div id="result-text"></div>
+    <button id="copy-btn" onclick="copyResult()">نسخ البرومبت</button>
+</div>
+
+</div>
+
+<script>
+function generatePrompt() {
+    const idea = document.getElementById('idea').value.trim();
+    const role = document.getElementById('role').value;
+    const tone = document.getElementById('tone').value;
+    const length = document.getElementById('length').value;
+    const format = document.getElementById('format').value;
+
+    if (idea === "") {
+        alert("من فضلك اكتب فكرة البرومبت أولاً.");
+        return;
+    }
+
+    const prompt =
+        "تصرف كـ " + role + ".\n\n" +
+        "المهمة: " + idea + "\n\n" +
+        "النبرة المطلوبة: " + tone + ".\n" +
+        "طول الإجابة: " + length + ".\n" +
+        "صيغة الإخراج: " + format + ".\n\n" +
+        "تأكد أن الناتج واضح، منظم، وخالٍ من أي حشو غير ضروري.";
+
+    document.getElementById('result-text').innerText = prompt;
+    document.getElementById('result-box').style.display = 'block';
+    document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyResult() {
+    const text = document.getElementById('result-text').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        const original = btn.innerText;
+        btn.innerText = "تم النسخ ✓";
+        setTimeout(() => { btn.innerText = original; }, 1800);
+    });
+}
+</script>
+
+</body>
+</html>

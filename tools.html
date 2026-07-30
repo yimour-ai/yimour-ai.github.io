@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أدوات الذكاء الاصطناعي - عالم الذكاء الاصطناعي</title>
+
+<style>
+  .btn{
+    display:inline-block;
+    padding:12px 24px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+}
+
+header {
+    background: white;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+nav a {
+    margin: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.container {
+    margin: 30px auto;
+    width: 90%;
+    max-width: 900px;
+}
+
+.intro {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ddd;
+    margin-bottom: 25px;
+}
+
+.intro h1 {
+    color: #2563eb;
+}
+
+#search-box {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.catnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.catnav a {
+    background: #eef2ff;
+    color: #2563eb;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+h2.cat-title {
+    color: #2563eb;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+/* ===== بطاقات دليل الأدوات ===== */
+.tools-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+@media (max-width: 600px) {
+    .tools-grid { grid-template-columns: 1fr; }
+}
+
+.tool-card {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ddd;
+}
+
+.tool-card h3 {
+    margin: 0 0 8px;
+    color: #222;
+    font-size: 16px;
+}
+
+.tool-card p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+}
+
+.tool-card a.visit-btn {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.tool-card a.visit-btn:hover {
+    background: #1d4ed8;
+}
+
+.tag {
+    display: inline-block;
+    background: #eef2ff;
+    color: #2563eb;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+/* ===== الأداة التفاعلية ===== */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ddd;
+    margin-bottom: 15px;
+}
+
+textarea#counter-input {
+    width: 100%;
+    height: 130px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.stats-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.stat-box {
+    flex: 1;
+    min-width: 120px;
+    background: #eef2ff;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+}
+
+.stat-box .num {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.stat-box .lbl {
+    font-size: 12px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.limit-warning {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #b91c1c;
+    display: none;
+}
+
+.no-results {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="prompt-generator.html">مولد البرومبتات</a>
+<a href="prompt-library.html">مكتبة البرومبتات</a>
+<a href="tools.html">الأدوات</a>
+</nav>
+</header>
+  <div class="card">
+  <h3>✨ مولد البرومبتات</h3>
+  <p>أنشئ برومبتات احترافية للكتابة والصور والبرمجة.</p>
+  <a href="prompt-generator.html" class="btn">فتح الأداة</a>
+</div>
+
+<div class="card">
+  <h3>📚 مكتبة البرومبتات</h3>
+  <p>مجموعة من البرومبتات الجاهزة للاستخدام.</p>
+  <a href="prompt-library.html" class="btn">تصفح المكتبة</a>
+</div>
+
+<div class="container">
+
+<div class="intro">
+<h1>أدوات الذكاء الاصطناعي</h1>
+<p>دليل بأشهر أدوات الذكاء الاصطناعي مصنّفة حسب الاستخدام، بالإضافة لأداة عملية مباشرة داخل الموقع.</p>
+<input type="text" id="search-box" placeholder="🔍 ابحث عن أداة (مثلا: صور، كتابة، فيديو...)">
+<div class="catnav">
+<a href="#writing-tools">كتابة ومحتوى</a>
+<a href="#image-tools">صور</a>
+<a href="#video-tools">فيديو</a>
+<a href="#chat-tools">شات بوت</a>
+<a href="#builtin">أداة داخل الموقع</a>
+</div>
+</div>
+
+<div id="tools-root"></div>
+<p class="no-results" id="no-results">ماكاينش أدوات مطابقة للبحث.</p>
+
+<h2 class="cat-title" id="builtin">🧮 أداة داخل الموقع: عداد الكلمات والأحرف</h2>
+
+<div class="card">
+<p>الصق أو اكتب النص ديالك (منشور، تعليق، وصف منتج...) وشوف عدد الكلمات والأحرف مباشرة — مفيد باش تحترم حدود المنصات (مثلا 280 حرف فـ X، أو طول وصف منتج فمتجرك).</p>
+
+<textarea id="counter-input" placeholder="اكتب أو الصق النص هنا..."></textarea>
+
+<div class="stats-row">
+    <div class="stat-box"><div class="num" id="word-count">0</div><div class="lbl">كلمة</div></div>
+    <div class="stat-box"><div class="num" id="char-count">0</div><div class="lbl">حرف (بدون فراغات)</div></div>
+    <div class="stat-box"><div class="num" id="char-count-total">0</div><div class="lbl">حرف (بالفراغات)</div></div>
+    <div class="stat-box"><div class="num" id="sentence-count">0</div><div class="lbl">جملة تقريبًا</div></div>
+</div>
+
+<p class="limit-warning" id="limit-warning">⚠️ النص تجاوز 280 حرف — طويل بالنسبة لمنشور X (تويتر سابقًا).</p>
+</div>
+
+</div>
+
+<script>
+const toolsData = [
+  { id: "writing-tools", title: "✍️ كتابة ومحتوى", tools: [
+    { name: "ChatGPT", desc: "مساعد ذكاء اصطناعي عام لكتابة النصوص، الإجابة على الأسئلة، وتوليد الأفكار.", url: "https://chat.openai.com" },
+    { name: "Claude", desc: "مساعد ذكاء اصطناعي من Anthropic، قوي في الكتابة الطويلة والتحليل والبرمجة.", url: "https://claude.ai" },
+    { name: "Grammarly", desc: "أداة لتصحيح الإملاء والقواعد وتحسين أسلوب الكتابة بالإنجليزية.", url: "https://www.grammarly.com" },
+    { name: "Copy.ai", desc: "أداة متخصصة في توليد نصوص تسويقية وإعلانية جاهزة بسرعة.", url: "https://www.copy.ai" }
+  ]},
+  { id: "image-tools", title: "🎨 صور", tools: [
+    { name: "Midjourney", desc: "من أقوى أدوات توليد الصور الفنية والإبداعية من نص وصفي.", url: "https://www.midjourney.com" },
+    { name: "DALL·E", desc: "أداة من OpenAI لتوليد صور واقعية أو فنية من وصف نصي بسيط.", url: "https://openai.com/dall-e-3" },
+    { name: "Canva AI", desc: "أدوات ذكاء اصطناعي مدمجة داخل Canva للتصميم السريع وتوليد الصور.", url: "https://www.canva.com/ai-image-generator" }
+  ]},
+  { id: "video-tools", title: "🎬 فيديو", tools: [
+    { name: "Runway", desc: "أداة احترافية لتوليد وتعديل الفيديو باستخدام الذكاء الاصطناعي.", url: "https://runwayml.com" },
+    { name: "Kling AI", desc: "أداة صينية قوية لتوليد فيديوهات واقعية من نص أو صورة.", url: "https://klingai.com" },
+    { name: "Invideo AI", desc: "أداة سهلة لتحويل فكرة أو نص إلى فيديو جاهز مع صوت وموسيقى.", url: "https://invideo.io/ai" },
+    { name: "Pika", desc: "أداة لتوليد مقاطع فيديو قصيرة وإبداعية من نص أو صورة.", url: "https://pika.art" }
+  ]},
+  { id: "chat-tools", title: "🤖 شات بوت", tools: [
+    { name: "Gemini", desc: "مساعد Google الذكي، مدمج مع خدمات جوجل وبحث الويب.", url: "https://gemini.google.com" },
+    { name: "Perplexity", desc: "محرك بحث ذكي يجاوب على الأسئلة مع ذكر المصادر مباشرة.", url: "https://www.perplexity.ai" }
+  ]}
+];
+
+const root = document.getElementById('tools-root');
+
+toolsData.forEach(cat => {
+  const h2 = document.createElement('h2');
+  h2.className = 'cat-title';
+  h2.id = cat.id;
+  h2.textContent = cat.title;
+  root.appendChild(h2);
+
+  const grid = document.createElement('div');
+  grid.className = 'tools-grid';
+  grid.dataset.catId = cat.id;
+
+  cat.tools.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'tool-card';
+    card.dataset.search = (t.name + ' ' + t.desc).toLowerCase();
+
+    card.innerHTML = `
+      <span class="tag">${cat.title.replace(/^[^\s]+\s/, '')}</span>
+      <h3>${t.name}</h3>
+      <p>${t.desc}</p>
+      <a class="visit-btn" href="${t.url}" target="_blank" rel="noopener">زيارة الأداة</a>
+    `;
+    grid.appendChild(card);
+  });
+
+  root.appendChild(grid);
+});
+
+document.getElementById('search-box').addEventListener('input', function () {
+  const q = this.value.trim().toLowerCase();
+  let anyVisible = false;
+
+  document.querySelectorAll('.tool-card').forEach(card => {
+    const match = card.dataset.search.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) anyVisible = true;
+  });
+
+  document.querySelectorAll('.tools-grid').forEach(grid => {
+    const hasVisible = Array.from(grid.querySelectorAll('.tool-card')).some(c => c.style.display !== 'none');
+    grid.previousElementSibling.style.display = hasVisible ? '' : 'none';
+    grid.style.display = hasVisible ? '' : 'none';
+  });
+
+  document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+});
+
+// ===== عداد الكلمات والأحرف =====
+const counterInput = document.getElementById('counter-input');
+counterInput.addEventListener('input', function () {
+  const text = this.value;
+  const trimmed = text.trim();
+
+  const words = trimmed === '' ? 0 : trimmed.split(/\s+/).length;
+  const charsNoSpace = text.replace(/\s/g, '').length;
+  const charsTotal = text.length;
+  const sentences = trimmed === '' ? 0 : (trimmed.match(/[.!?؟،]+/g) || []).length || (trimmed ? 1 : 0);
+
+  document.getElementById('word-count').textContent = words;
+  document.getElementById('char-count').textContent = charsNoSpace;
+  document.getElementById('char-count-total').textContent = charsTotal;
+  document.getElementById('sentence-count').textContent = sentences;
+
+  document.getElementById('limit-warning').style.display = charsTotal > 280 ? 'block' : 'none';
+});
+</script>
+
+</body>
+</html>

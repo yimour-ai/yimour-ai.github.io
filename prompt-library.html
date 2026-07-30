@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة البرومبتات - عالم الذكاء الاصطناعي</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+}
+
+header {
+    background: white;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+nav a {
+    margin: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.container {
+    margin: 30px auto;
+    width: 90%;
+    max-width: 900px;
+}
+
+.intro {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ddd;
+    margin-bottom: 25px;
+}
+
+.intro h1 {
+    color: #2563eb;
+}
+
+#search-box {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.catnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.catnav a {
+    background: #eef2ff;
+    color: #2563eb;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+h2.cat-title {
+    color: #2563eb;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ddd;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.prompt-text {
+    background: #f5f7fb;
+    padding: 12px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    font-size: 14px;
+    line-height: 2.1;
+    color: #333;
+    border: 1px dashed #ccc;
+}
+
+.fill-input {
+    border: none;
+    border-bottom: 2px solid #2563eb;
+    background: #eef2ff;
+    color: #1d4ed8;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    min-width: 80px;
+}
+
+.fill-input:focus {
+    outline: none;
+    background: #dbe6ff;
+}
+
+button.copy-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button.copy-btn:hover {
+    background: #1d4ed8;
+}
+
+button.copy-btn.copied {
+    background: #16a34a;
+}
+
+.no-results {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="prompt-generator.html">مولد البرومبتات</a>
+<a href="prompt-library.html">مكتبة البرومبتات</a>
+</nav>
+</header>
+
+<div class="container">
+
+<div class="intro">
+<h1>مكتبة البرومبتات الجاهزة</h1>
+<p>ابحث عن البرومبت اللي تحتاجه، عبّي الحقول الزرقاء مباشرة، ثم اضغط "نسخ الأمر".</p>
+<input type="text" id="search-box" placeholder="🔍 ابحث عن برومبت (مثلا: فيديو، إعلان، مقال...)">
+<div class="catnav">
+<a href="#marketing">تسويق وإعلانات</a>
+<a href="#social">سوشال ميديا</a>
+<a href="#video">فيديو AI</a>
+<a href="#writing">مقالات ومدونات</a>
+</div>
+</div>
+
+<div id="prompts-root"></div>
+<p class="no-results" id="no-results">ماكاينش برومبتات مطابقة للبحث.</p>
+
+</div>
+
+<script>
+const data = [
+  { id: "marketing", title: "📈 تسويق وإعلانات", prompts: [
+    { title: "نص إعلاني قصير لمنتج", text: "اكتب نص إعلان تسويقي قصير لمنتج [اسم المنتج]، يستهدف [الفئة العمرية/الجمهور]، بنبرة [واثقة/ودية/فاخرة]، لا يتجاوز [عدد] كلمة، ويتضمن دعوة واضحة لاتخاذ إجراء في النهاية." },
+    { title: "خطة حملة إعلانية", text: "ضع لي خطة حملة إعلانية مدتها [عدد] أسابيع للترويج لـ [المنتج/الخدمة] على منصة [Facebook/Instagram]، تتضمن: الهدف، الجمهور المستهدف، 3 أفكار محتوى أسبوعية، واقتراح ميزانية تقريبية." },
+    { title: "وصف منتج لمتجر إلكتروني", text: "اكتب وصفًا تسويقيًا لمنتج [اسم المنتج] لصفحة متجر إلكتروني، يبرز 3 مزايا رئيسية، بأسلوب مقنع وسلس، ولا يتجاوز [عدد] كلمة." },
+    { title: "بريد إلكتروني ترويجي", text: "اكتب بريدًا إلكترونيًا ترويجيًا لـ [المنتج/العرض]، بعنوان جذاب، وفقرة قصيرة توضح الفائدة الرئيسية، وينتهي بزر دعوة واضح لاتخاذ إجراء." },
+    { title: "شعار (Slogan) لعلامة تجارية", text: "اقترح 5 شعارات قصيرة وجذابة لعلامة تجارية اسمها [اسم العلامة] تعمل في مجال [المجال]، بحيث تكون سهلة التذكر ومناسبة لـ [الجمهور المستهدف]." }
+  ]},
+  { id: "social", title: "💬 محتوى سوشال ميديا", prompts: [
+    { title: "خطة منشورات أسبوعية", text: "اقترح خطة منشورات لمدة أسبوع لصفحة [نوع النشاط] على [Facebook/Instagram]، بحيث يتضمن كل يوم: فكرة المنشور، نوع المحتوى، وهدف المنشور." },
+    { title: "منشور تفاعلي", text: "اكتب منشورًا قصيرًا لصفحة [المجال] يطرح سؤالًا يحفّز المتابعين على التعليق والمشاركة، بأسلوب [بالدارجة المغربية/الفصحى]، ولا يتجاوز [عدد] كلمة." },
+    { title: "تعليق ذكي على حدث رائج", text: "اكتب منشورًا قصيرًا يربط بين [حدث رائج حاليًا] وبين [مجال نشاطي]، بطريقة طبيعية دون مبالغة." },
+    { title: "رد على تعليق زائر", text: "اكتب ردًا ودّيًا واحترافيًا على تعليق عميل يسأل عن [الموضوع/المنتج]، بحيث يكون مختصرًا ومفيدًا ويشجعه على التواصل معنا مباشرة." },
+    { title: "سلسلة منشورات تعليمية (Carousel)", text: "اكتب محتوى 5 شرائح لمنشور تعليمي (Carousel) عن [الموضوع]، بحيث تكون كل شريحة فكرة واحدة قصيرة وواضحة، وتنتهي الشريحة الأخيرة بدعوة للمتابعة أو المشاركة." }
+  ]},
+  { id: "video", title: "🎬 توليد فيديو AI", prompts: [
+    { title: "مشهد فيديو قصير", text: "مشهد فيديو مدته [عدد] ثوانٍ يُظهر [وصف الشخصية/الكائن] في [المكان]، بإضاءة [نهارية/غروب]، بحركة كاميرا [بطيئة/ثابتة]، وأسلوب بصري [واقعي/سينمائي]." },
+    { title: "فيديو ترويجي لمنتج", text: "فيديو ترويجي قصير لمنتج [اسم المنتج]، يبدأ بلقطة قريبة، ثم ينتقل لمشهد استخدام واقعي، بموسيقى خلفية [هادئة/حماسية]، ومدة لا تتجاوز [عدد] ثانية." },
+    { title: "مشهد كوميدي (حيوانات)", text: "مشهد فيديو كوميدي قصير يظهر فيه [وصف الحيوان] في موقف طريف داخل [المكان]، بألوان زاهية، ومدة لا تتجاوز [عدد] ثانية." },
+    { title: "فيديو قبل وبعد", text: "فيديو قصير يعرض تحولًا من [الحالة قبل] إلى [الحالة بعد] لـ [المنتج/الخدمة]، بانتقال سلس بين المشهدين، ومدة لا تتجاوز [عدد] ثوانٍ." },
+    { title: "مشهد طبيعي هادئ (خلفية محتوى)", text: "مشهد فيديو هادئ لـ [عنصر طبيعي: بحر/غابة/جبال] وقت [الغروب/الفجر]، بحركة كاميرا بطيئة جدًا، مناسب كخلفية لمحتوى تأملي أو اقتباسات." }
+  ]},
+  { id: "writing", title: "✍️ مقالات ومدونات", prompts: [
+    { title: "هيكل مقال متكامل", text: "ضع لي هيكلاً تفصيليًا لمقال بعنوان \"[عنوان المقال]\"، يستهدف [الجمهور]، يتضمن مقدمة، 4 إلى 5 عناوين فرعية، وخاتمة." },
+    { title: "مقال تعليمي كامل", text: "اكتب مقالاً تعليميًا بعنوان \"[العنوان]\" باللغة العربية الفصحى، موجهًا لجمهور [مستوى المعرفة]، بطول [عدد] كلمة، بأسلوب واضح ومباشر مع أمثلة عملية." },
+    { title: "إعادة صياغة نص موجود", text: "أعد صياغة النص التالي بأسلوب أوضح وأكثر احترافية، مع الحفاظ على المعنى الأصلي:\n\"[الصق النص هنا]\"" },
+    { title: "عنوان جذاب لمقال (SEO)", text: "اقترح 5 عناوين جذابة ومحسّنة لمحركات البحث لمقال عن [الموضوع]، بحيث تكون قصيرة وتثير الفضول وتتضمن الكلمة المفتاحية [الكلمة المفتاحية]." },
+    { title: "ملخص لمقال طويل", text: "لخّص النص التالي في فقرة واحدة لا تتجاوز 5 أسطر، مع الحفاظ على الأفكار الأساسية:\n\"[الصق النص هنا]\"" }
+  ]}
+];
+
+const root = document.getElementById('prompts-root');
+
+function buildPromptHTML(text) {
+  // يحول [كلمة] إلى حقل تعبئة قابل للتحرير
+  const parts = text.split(/(\[[^\]]+\])/g);
+  return parts.map(part => {
+    if (part.startsWith('[') && part.endsWith(']')) {
+      const hint = part.slice(1, -1);
+      return `<input type="text" class="fill-input" data-fallback="${hint}" placeholder="${hint}" style="width:${Math.max(hint.length,4)}ch">`;
+    }
+    return part.replace(/\n/g, '<br>');
+  }).join('');
+}
+
+data.forEach(cat => {
+  const h2 = document.createElement('h2');
+  h2.className = 'cat-title';
+  h2.id = cat.id;
+  h2.textContent = cat.title;
+  root.appendChild(h2);
+
+  cat.prompts.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.search = (p.title + ' ' + p.text).toLowerCase();
+
+    const h3 = document.createElement('h3');
+    h3.textContent = p.title;
+
+    const textDiv = document.createElement('div');
+    textDiv.className = 'prompt-text';
+    textDiv.innerHTML = buildPromptHTML(p.text);
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'نسخ الأمر';
+    btn.onclick = function () { copyCard(textDiv, btn); };
+
+    card.appendChild(h3);
+    card.appendChild(textDiv);
+    card.appendChild(btn);
+    root.appendChild(card);
+  });
+});
+
+function copyCard(textDiv, btn) {
+  let result = '';
+  textDiv.childNodes.forEach(node => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      result += node.textContent;
+    } else if (node.tagName === 'BR') {
+      result += '\n';
+    } else if (node.tagName === 'INPUT') {
+      result += node.value.trim() !== '' ? node.value.trim() : '[' + node.dataset.fallback + ']';
+    }
+  });
+  navigator.clipboard.writeText(result).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'تم النسخ ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+  });
+}
+
+// البحث والفلترة
+document.getElementById('search-box').addEventListener('input', function () {
+  const q = this.value.trim().toLowerCase();
+  let anyVisible = false;
+
+  document.querySelectorAll('.card').forEach(card => {
+    const match = card.dataset.search.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) anyVisible = true;
+  });
+
+  document.querySelectorAll('.cat-title').forEach(h2 => {
+    let next = h2.nextElementSibling;
+    let hasVisible = false;
+    while (next && !next.classList.contains('cat-title')) {
+      if (next.classList.contains('card') && next.style.display !== 'none') hasVisible = true;
+      next = next.nextElementSibling;
+    }
+    h2.style.display = hasVisible ? '' : 'none';
+  });
+
+  document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+});
+</script>
+
+</body>
+</html>
