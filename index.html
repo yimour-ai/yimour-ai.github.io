@@ -16,37 +16,20 @@
 crossorigin="anonymous"></script>
 
 <style>
-  .logo-title{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:15px;
-    border:3px solid #2563eb;
-    padding:15px;
-    border-radius:15px;
-    background:#fff;
-    width:90%;
-    max-width:700px;
-    margin:20px auto;
-}
-
-.logo-title h1{
-    color:#2563eb;
-    font-size:34px;
-}
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
-  
+
 body{
 font-family:Arial,sans-serif;
 background:#f5f5f5;
 color:#222;
 line-height:1.8;
 }
+
 nav{
 background:#1e40af;
 padding:15px;
@@ -59,26 +42,43 @@ text-decoration:none;
 margin:10px;
 font-weight:bold;
 }
-  
 
 header{
-background:#2563eb;
+background:linear-gradient(180deg,#2563eb,#1d4ed8);
 color:#fff;
 text-align:center;
-padding:40px 20px;
+padding:50px 20px 45px;
 }
-  
-header img{
-  .logo-title{
+
+.logo-3d{
+width:130px;
+height:130px;
+margin:0 auto 18px;
+border-radius:50%;
+background:linear-gradient(145deg,#ffb877,#ff8a1e 55%,#e6690a);
+box-shadow:
+0 10px 0 #c9550a,
+0 16px 25px rgba(0,0,0,.35),
+inset 0 4px 8px rgba(255,255,255,.55),
+inset 0 -8px 12px rgba(0,0,0,.25);
 display:flex;
 align-items:center;
 justify-content:center;
-gap:15px;
+font-size:60px;
+transform:perspective(500px) rotateX(6deg);
 }
 
+@media(max-width:480px){
+.logo-3d{
+width:96px;
+height:96px;
+font-size:44px;
+box-shadow:
+0 7px 0 #c9550a,
+0 12px 18px rgba(0,0,0,.35),
+inset 0 3px 6px rgba(255,255,255,.55),
+inset 0 -6px 10px rgba(0,0,0,.25);
 }
-width:100px;
-margin-bottom:15px;
 }
 
 header h1{
@@ -144,7 +144,6 @@ font-weight:bold;
 background:#1d4ed8;
 }
 
-
 footer{
 background:#222;
 color:#fff;
@@ -172,176 +171,59 @@ color:#fff;
 font-size:20px;
 cursor:pointer;
 }
-  <body>
-  <header>
-
-<div class="logo-title">
-
-<img src="favicon.png" width="100">
-
-<h1>🌐 عالم الذكاء الاصطناعي</h1>
-
-</div>
-
-</header>
-<header
-.logo-title{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:15px;
-}
-
-}
-width:100px;
-margin-bottom:15px;
-  }
-
-<header h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.search-box{
-text-align:center;
-margin:25px;
-}
-
-.search-box input{
-width:85%;
-max-width:500px;
-padding:12px;
-font-size:16px;
-border:2px solid #2196f3;
-border-radius:30px;
-outline:none;
-}
-
-section{
-padding:30px;
-}
-
-h2{
-text-align:center;
-color:#2563eb;
-margin-bottom:25px;
-}
-
-.card{
-background:#fff;
-width:90%;
-max-width:700px;
-margin:20px auto;
-padding:25px;
-border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
-text-align:center;
-}
-
-.card h3{
-margin-bottom:15px;
-}
-
-.card p{
-margin-bottom:20px;
-}
-
-.btn{
-display:inline-block;
-padding:12px 25px;
-background:#2563eb;
-color:#fff;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
-}
-
-.btn:hover{
-background:#1d4ed8;
-}
-
-footer{
-background:#222;
-color:#fff;
-text-align:center;
-padding:30px;
-margin-top:40px;
-}
-
-footer a{
-color:#fff;
-text-decoration:none;
-margin:0 8px;
-}
-
-#topBtn{
-display:none;
-position:fixed;
-bottom:20px;
-left:20px;
-padding:12px 15px;
-border:none;
-border-radius:50%;
-background:#2563eb;
-color:#fff;
-font-size:20px;
-cursor:pointer;
-}
-  <body>
 
 </style>
 
 </head>
+
+<body>
 <nav>
-  <a href="index.html">🏠 الرئيسية</a>
+<a href="index.html">الرئيسية</a>
 </nav>
 
-  <header>
-  <nav>
-   <a href="index.html">الرئيسية</a>
-<a href="tools.html">الأدوات</a>
-<a href="prompt-generator.html">⚡ المولد</a>
-<a href="prompt-library.html">📚 المكتبة</a>
-    
-  </nav>
-  </header>
-  <div class="logo-title">
-    
-    <div>
-      <h1>عالم الذكاء الاصطناعي</h1>
-      <p>اكتشف أفضل أدوات الذكاء الاصطناعي والمقالات التعليمية في مكان واحد.</p>
-    </div>
-  </div>
-  
+<header>
+
+<div class="logo-3d">🤖</div>
+
+<h1>عالم الذكاء الاصطناعي</h1>
+
+<p>اكتشف أفضل أدوات الذكاء الاصطناعي والمقالات التعليمية في مكان واحد.</p>
+
+</header>
+
 <div class="search-box">
 <input type="text" id="searchInput" placeholder="🔍 ابحث عن مقال...">
 </div>
 
 <section>
-
-<h2>🛠️ أدوات الذكاء الاصطناعي</h2>
   <div class="card">
-  <h2>🤖 ما هو ChatGPT؟</h2>
-  <p>دليل شامل يشرح ChatGPT، وكيف يعمل، وأهم استخداماته ومميزاته.</p>
-  <a href="article11.html" class="btn">قراءة المقال</a>
+<h3>📰 أخبار الذكاء الاصطناعي</h3>
+<p>تابع أحدث أخبار وتقنيات الذكاء الاصطناعي والتطورات الجديدة في هذا المجال.</p>
+<a href="news.html" class="btn">عرض الأخبار</a>
   </div>
 
-  <div class="card">
-  <h2>📚 مكتبة البرومبتات</h2>
-  <p>
-    تصفح عشرات البرومبتات الجاهزة للكتابة والتسويق والبرمجة وإنشاء الصور.
-  </p>
-  <a href="prompt-library.html" class="btn">فتح المكتبة</a>
-  </div>
+<h2>🧰 أدواتنا الخاصة</h2>
 
-  <div class="card">
-  <h2>⚡ مولد البرومبتات</h2>
-  <p>
-    أنشئ برومبتات احترافية مخصصة لمشاريعك بضغطة واحدة.
-  </p>
-  <a href="prompt-generator.html" class="btn">استخدام الأداة</a>
-  </div>
-  
+<div class="card">
+<h3>⚡ مولد البرومبت (Prompt Generator)</h3>
+<p>حوّل فكرتك إلى برومبت احترافي منظم وجاهز للاستخدام مع أي أداة ذكاء اصطناعي.</p>
+<a href="prompt-generator.html" class="btn">جرّب المولد</a>
+</div>
+
+<div class="card">
+<h3>📚 مكتبة البرومبتات (Prompt Library)</h3>
+<p>مجموعة جاهزة من البرومبتات للتسويق والسوشال ميديا وتوليد الفيديو وكتابة المقالات.</p>
+<a href="prompt-library.html" class="btn">تصفّح المكتبة</a>
+</div>
+
+<div class="card">
+<h3>🧩 دليل أدوات الذكاء الاصطناعي</h3>
+<p>قارن بين أفضل أدوات الذكاء الاصطناعي المصنفة حسب الاستخدام، مع أداة عداد كلمات مدمجة.</p>
+<a href="tools.html" class="btn">استكشف الأدوات</a>
+</div>
+
+<h2>🛠️ أدوات الذكاء الاصطناعي الخارجية</h2>
+
 <div class="card">
 <h3>🤖 ChatGPT</h3>
 <p>يساعدك في الكتابة، البرمجة، الترجمة، والإجابة عن الأسئلة.</p>
@@ -373,6 +255,12 @@ cursor:pointer;
 </div>
 
 <h2>📚 مقالات الذكاء الاصطناعي</h2>
+
+<div class="card">
+<h3>🤖 ما هو ChatGPT؟</h3>
+<p>دليل شامل يشرح ChatGPT، وكيف يعمل، وأهم استخداماته ومميزاته.</p>
+<a href="article11.html" class="btn">قراءة المقال</a>
+</div>
   <div class="card">
 <h3>📖 ما هو الذكاء الاصطناعي؟</h3>
 <p>تعرف على مفهوم الذكاء الاصطناعي وكيف يعمل وأهم استخداماته.</p>
@@ -390,13 +278,7 @@ cursor:pointer;
 <p>تعرف على الأنواع المختلفة للذكاء الاصطناعي واستخدامات كل نوع.</p>
 <a href="article3.html" class="btn">قراءة المقال</a>
 </div>
-  
-<div class="card">
-<h3>📰 أخبار الذكاء الاصطناعي</h3>
-<p>آخر مستجدات وتطورات عالم الذكاء الاصطناعي بشكل دوري.</p>
-<a href="news.html" class="btn">قراءة الأخبار</a>
-</div>
-  
+
 <div class="card">
 <h3>🚀 مستقبل الذكاء الاصطناعي</h3>
 <p>تعرف على أبرز التوقعات حول مستقبل الذكاء الاصطناعي وتأثيره على حياتنا.</p>
@@ -439,6 +321,42 @@ cursor:pointer;
 <a href="article10.html" class="btn">قراءة المقال</a>
 </div>
 
+<div class="card">
+<h3>🎓 الذكاء الاصطناعي في التعليم</h3>
+<p>اكتشف كيف يساعد الذكاء الاصطناعي الطلاب والمعلمين في تحسين العملية التعليمية.</p>
+<a href="article12.html" class="btn">قراءة المقال</a>
+</div>
+
+<div class="card">
+<h3>🔐 الأمن السيبراني والذكاء الاصطناعي</h3>
+<p>تعرف على دور الذكاء الاصطناعي في تعزيز الأمن السيبراني ومواجهة التهديدات الرقمية.</p>
+<a href="article13.html" class="btn">قراءة المقال</a>
+</div>
+
+<div class="card">
+<h3>🏥 الذكاء الاصطناعي في الرعاية الصحية: ثورة في عالم الطب</h3>
+<p>تعرف على كيفية إحداث الذكاء الاصطناعي لثورة حقيقية في قطاع الرعاية الصحية.</p>
+<a href="article14.html" class="btn">قراءة المقال</a>
+</div>
+
+<div class="card">
+<h3>💼 الذكاء الاصطناعي وسوق العمل</h3>
+<p>تعرف على تأثير الذكاء الاصطناعي على الوظائف وسوق العمل في المستقبل.</p>
+<a href="article15.html" class="btn">قراءة المقال</a>
+</div>
+
+<div class="card">
+<h3>🩺 مستقبل الذكاء الاصطناعي في الطب</h3>
+<p>تعرف على أبرز التوقعات لمستقبل الذكاء الاصطناعي في المجال الطبي.</p>
+<a href="article16.html" class="btn">قراءة المقال</a>
+</div>
+
+<div class="card">
+<h3>🛡️ الذكاء الاصطناعي والأمن السيبراني</h3>
+<p>تعرف على العلاقة بين الذكاء الاصطناعي والأمن السيبراني وكيفية حماية الأنظمة.</p>
+<a href="article17.html" class="btn">قراءة المقال</a>
+</div>
+
 </section>
   
   <div style="margin-top:20px;padding:20px;border:1px solid #ddd;border-radius:10px;background:#f9f9f9;text-align:center;">
@@ -475,7 +393,7 @@ Abdelazizlimour26@gmail.com
 <a href="privacy.html">سياسة الخصوصية</a> |
 <a href="terms.html">شروط الاستخدام</a> |
 <a href="contact.html">اتصل بنا</a>
-  <li><a href="disclaimer.html">إخلاء المسؤولية</a></li>
+<a href="disclaimer.html">إخلاء المسؤولية</a>|
 </p>
 </footer>
 

@@ -27,3 +27,7 @@ git rebase --continue
 git push origin main
 git status
 git rebase --continue
+git add .
+git commit -m "Update news page"
+git commit -m "Update index and news pages"
+git push origin main
