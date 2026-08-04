@@ -58,6 +58,18 @@
 <loc>https://aziz680-blep.github.io/news.html</loc>
 </url>
   </url>
+  <url>
+  <loc>https://aziz680-blep.github.io/article18.html</loc>
+  <lastmod>2026-08-04</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+  <url>
+  <loc>https://aziz680-blep.github.io/article19.html</loc>
+  <lastmod>2026-08-04</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 
 </urlset>
 
