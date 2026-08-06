@@ -1,0 +1,37 @@
+name: تحديث أخبار الذكاء الاصطناعي
+
+on:
+  schedule:
+    # كل يوم الساعة 08:00 بتوقيت غرينتش (تقريباً 09:00 بتوقيت المغرب)
+    - cron: "0 8 * * *"
+  workflow_dispatch: {}   # يسمح بتشغيل يدوي من تبويب Actions فـ GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout المستودع
+        uses: actions/checkout@v4
+
+      - name: تثبيت Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: تثبيت المكتبات المطلوبة
+        run: pip install feedparser
+
+      - name: تشغيل السكريبت وتوليد news.html
+        run: python3 generate_news.py
+
+      - name: رفع news.html إذا تغيّر
+        run: |
+          git config user.name "news-bot"
+          git config user.email "news-bot@users.noreply.github.com"
+          git add news.html
+          git diff --staged --quiet || git commit -m "تحديث تلقائي لصفحة الأخبار"
+          git push
+
