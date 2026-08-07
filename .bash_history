@@ -31,3 +31,16 @@ git add .
 git commit -m "Update news page"
 git commit -m "Update index and news pages"
 git push origin main
+git push origin main
+git status
+git push origin main
+git add .
+git commit -m "Add workflow"
+git push origin main
+git push origin main
+git add .
+git commit -m "Add AI news workflow"
+git push origin main
+git add .
+git commit -m "إضافة نظام الأخبار التلقائي"
+git push origin main
