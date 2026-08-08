@@ -15,7 +15,7 @@ generate_news.py
 
 import feedparser
 import html
-from datetime import datetime
+from datetime import datetime, timezone
 
 # --------- إعدادات ---------
 
@@ -71,10 +71,31 @@ def clean_summary(raw_html):
         text = text[:MAX_DESC_CHARS].rsplit(" ", 1)[0] + "..."
     return text
 
-
 def parse_date(date_str):
     if not date_str:
         return None
+
+    formats = [
+        "%a, %d %b %Y %H:%M:%S %z",
+        "%a, %d %b %Y %H:%M:%S %Z",
+        "%Y-%m-%dT%H:%M:%S%z",
+    ]
+
+    for fmt in formats:
+        try:
+            dt = datetime.strptime(date_str, fmt)
+
+            # توحيد جميع التواريخ إلى UTC وبدون timezone
+            if dt.tzinfo is not None:
+                dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
+
+            return dt
+
+        except ValueError:
+            continue
+
+    return None
+
     formats = [
         "%a, %d %b %Y %H:%M:%S %z",
         "%a, %d %b %Y %H:%M:%S %Z",
@@ -121,7 +142,8 @@ def build_page(items):
 
 <title>{PAGE_TITLE}</title>
 <meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول."
-<meta name="robots" content="index, follow">>
+<meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول.">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://aziz680-blep.github.io/ai-wold/news.html">
 <style>
   * {{ box-sizing: border-box; }}
