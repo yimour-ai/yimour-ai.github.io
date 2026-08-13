@@ -1,93 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> <url>
-  <loc>https://aziz680-blep.github.io/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://aziz680-blep.github.io/about.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/contact.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/privacy.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/terms.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/disclaimer.html</loc>
+    <loc>https://yimour-ai.github.io/</loc>
   </url>
 
-  <url><loc>https://aziz680-blep.github.io/article1.html</loc>
+  <url>
+    <loc>https://yimour-ai.github.io/about.html</loc>
   </url>
-  <url><loc>https://aziz680-blep.github.io/article2.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article3.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article4.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article5.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article6.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article7.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article8.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article9.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article10.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article11.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article12.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article13.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article14.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article15.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article16.html</loc>
-  </url>
-  <url><loc>https://aziz680-blep.github.io/article17.html</loc>
-  </url>
-<url>
-  <loc>https://aziz680-blep.github.io/prompt-library.html</loc>
-</url>
 
-<url>
-  <loc>https://aziz680-blep.github.io/prompt-generator.html</loc>
-</url>
+  <url>
+    <loc>https://yimour-ai.github.io/contact.html</loc>
+  </url>
 
-<url>
-  <loc>https://aziz680-blep.github.io/tools.html</loc>
-</url>
+  <url>
+    <loc>https://yimour-ai.github.io/privacy.html</loc>
+  </url>
 
-<url>
-  <loc>https://aziz680-blep.github.io/news.html</loc>
-</url>
+  <url>
+    <loc>https://yimour-ai.github.io/terms.html</loc>
+  </url>
 
-<url>
-  <loc>https://aziz680-blep.github.io/article18.html</loc>
-  <lastmod>2026-08-04</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+  <url>
+    <loc>https://yimour-ai.github.io/disclaimer.html</loc>
+  </url>
 
-<url>
-  <loc>https://aziz680-blep.github.io/article19.html</loc>
-  <lastmod>2026-08-04</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+  <url>
+    <loc>https://yimour-ai.github.io/article1.html</loc>
+  </url>
 
-<url>
-  <loc>https://aziz680-blep.github.io/article20.html</loc>
-  <lastmod>2026-08-05</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+  <url>
+    <loc>https://yimour-ai.github.io/article2.html</loc>
+  </url>
 
-<url>
-  <loc>https://aziz680-blep.github.io/prompt-bundle-50.html</loc>
-</url>
+  <url>
+    <loc>https://yimour-ai.github.io/article3.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article4.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article5.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article6.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article7.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article8.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article9.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article10.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article11.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article12.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article13.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article14.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article15.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article16.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article17.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article18.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article19.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/article20.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/prompt-library.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/prompt-generator.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/tools.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/news.html</loc>
+  </url>
+
+  <url>
+    <loc>https://yimour-ai.github.io/prompt-bundle-50.html</loc>
+  </url>
 
 </urlset>
-
