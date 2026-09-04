@@ -1,214 +1,229 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>أخبار الذكاء الاصطناعي</title>
-<meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول."
-<meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://yimour-ai.github.io/news.html">
-<style>
-  * { box-sizing: border-box; }
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fb;
-    margin: 0;
-    padding: 0;
-    color: #1f2937;
-  }
-  header {
-    background: #ffffff;
-    padding: 24px 16px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-  header h1 {
-    margin: 0 0 6px;
-    color: #2563eb;
-    font-size: 28px;
-  }
-  header p {
-    margin: 0;
-    color: #666;
-    font-size: 14px;
-  }
-  .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 16px;
-  }
-  .back-link {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .back-link:hover { text-decoration: underline; }
-  .news-card {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    padding: 20px;
-    margin-bottom: 18px;
-  }
-  .news-title {
-    margin: 0 0 8px;
-    font-size: 19px;
-    color: #1f2937;
-  }
-  .news-meta {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 10px;
-  }
-  .news-summary {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #374151;
-    margin-bottom: 12px;
-  }
-  .news-link {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-  }
-  .news-link:hover { text-decoration: underline; }
-  footer {
-    text-align: center;
-    padding: 20px;
-    color: #999;
-    font-size: 13px;
-  }
-</style>
-<link rel="icon" type="image/png" href="favicon.png">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+
+  <title>أخبار الذكاء الاصطناعي</title>
+  <meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي، وأبرز الإصدارات والتقنيات الجديدة.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fb;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    header h1 {
+      margin: 0 0 6px 0;
+      color: #2563eb;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 0;
+      color: #6b7280;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .news-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      padding: 20px;
+    }
+
+    .news-date {
+      display: inline-block;
+      background-color: #eef2ff;
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .news-card h2 {
+      font-size: 19px;
+      margin: 0 0 10px 0;
+      color: #111827;
+    }
+
+    .news-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #374151;
+      margin: 0 0 12px 0;
+    }
+
+    .news-source {
+      font-size: 13px;
+    }
+
+    .news-source a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .news-source a:hover {
+      text-decoration: underline;
+    }
+
+    .note-box {
+      background: #fff7ed;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #92400e;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-<div class="site-logo">
-<img src="logo.webp" alt="عالم الذكاء الاصطناعي" style="width:130px;height:130px;object-fit:contain;">
-</div>
+  <header>
+    <h1>أخبار الذكاء الاصطناعي</h1>
+    <p>محتوى ثابت يُحدَّث يدويًا — آخر تحديث: 30 يوليو 2026</p>
+  </header>
 
-  <h1>أخبار الذكاء الاصطناعي</h1>
-  <p>آخر تحديث: 2026-09-03</p>
-</header>
+  <main>
+    <div class="container">
 
-<div class="container">
-  <a class="back-link" href="index.html">→ العودة إلى الرئيسية</a>
-  
-        <div class="news-card">
-          <h2 class="news-title">The Download: rethinking child safety and fossil-fueled farming</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-03</div>
-          <p class="news-summary">This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. Child-monitoring apps might need a reboot Digital harms have become the defining...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/03/1143385/the-download-rethinking-child-safety-online-fossil-fuels-farming/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+      <div class="note-box">
+        هذه الصفحة تعرض محتوى ثابتًا مكتوبًا مسبقًا، ولا تعتمد على أي اتصال خارجي أو API، لذلك تبقى تعمل دائمًا حتى لو توقفت أدوات الموقع الأخرى.
+      </div>
 
-        <div class="news-card">
-          <h2 class="news-title">Agriculture relies on fossil fuels. It’s costing us.</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-03</div>
-          <p class="news-summary">If you’ve had to fill up your vehicle’s gas tank or buy a plane ticket lately, you’ve probably felt the effects of rising fossil-fuel prices. But farmers buying fertilizer for their crops are especially aware of just...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/03/1143320/fertilizer-prices-fossil-fuels/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+      <div class="news-grid">
 
-        <div class="news-card">
-          <h2 class="news-title">Scaling agentic AI pilots across the enterprise</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-03</div>
-          <p class="news-summary">As agentic AI moves from experimentation toward enterprise deployment, the challenge is figuring out how agents can work together, connect to the systems and data they need, and operate safely across the workflows that...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/03/1142868/scaling-agentic-ai-pilots-across-the-enterprise/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+        <article class="news-card">
+          <span class="news-date">10 يوليو 2026</span>
+          <h2>OpenAI تطرح GPT-5.6 للاستخدام العام</h2>
+          <p>
+            أعلنت OpenAI عن الإطلاق العام لنماذج GPT-5.6 بعد حصولها على موافقة الجهات الأمريكية المختصة، في خطوة تعتبر امتدادًا لتسارع المنافسة بين كبرى شركات الذكاء الاصطناعي خلال هذا الصيف.
+          </p>
+          <div class="news-source">
+            <a href="https://aitnews.com/" target="_blank" rel="noopener noreferrer">
+              المصدر: البوابة التقنية
+            </a>
+          </div>
+        </article>
 
-        <div class="news-card">
-          <h2 class="news-title">Motional and MIT AI explains self-driving car decisions</h2>
-          <div class="news-meta">AI News • 2026-09-02</div>
-          <p class="news-summary">Motional and MIT researchers have built a system that lets self-driving cars explain their decisions in real-time, tackling the black-box problem in autonomous vehicle AI. The work, published in Nature, comes from a...</p>
-          <a class="news-link" href="https://www.artificialintelligence-news.com/news/motional-and-mit-ai-explains-self-driving-car-decisions/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+        <article class="news-card">
+          <span class="news-date">8 يوليو 2026</span>
+          <h2>Meta تطلق Muse Image لتوليد الصور</h2>
+          <p>
+            كشفت Meta عن نموذج جديد باسم Muse Image مخصص لإنشاء الصور بالذكاء الاصطناعي، ضمن سباق الشركات الكبرى لتقديم أدوات توليد بصري أكثر تطورًا للمستخدمين والمطورين.
+          </p>
+          <div class="news-source">
+            <a href="https://aitnews.com/" target="_blank" rel="noopener noreferrer">
+              المصدر: البوابة التقنية
+            </a>
+          </div>
+        </article>
 
-        <div class="news-card">
-          <h2 class="news-title">Facilitating AI integration with simplicity at scale</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-02</div>
-          <p class="news-summary">As companies scale, the technology supporting operations can become a liability just as quickly as it becomes an asset. Disconnected systems, site-specific tools, spreadsheets, and manual workarounds can create data...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/02/1142879/facilitating-ai-integration-with-simplicity-at-scale/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+        <article class="news-card">
+          <span class="news-date">1 يوليو 2026</span>
+          <h2>Google تطلق Nano Banana 2 Lite لتوليد الصور في ثوانٍ</h2>
+          <p>
+            أصدرت Google نموذجًا جديدًا لتوليد الصور يحمل اسم Nano Banana 2 Lite، يتميز بسرعة إنشاء الصورة في نحو 4 ثوانٍ فقط، إضافة إلى توسيع قدرات Gemini Spark على أجهزة Mac لأتمتة المهام الروتينية.
+          </p>
+          <div class="news-source">
+            <a href="https://aitnews.com/" target="_blank" rel="noopener noreferrer">
+              المصدر: البوابة التقنية
+            </a>
+          </div>
+        </article>
 
-        <div class="news-card">
-          <h2 class="news-title">The Download: AI puzzles and a path to our nearest star system</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-02</div>
-          <p class="news-summary">This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. AI models flub these intelligence tests. Can you fare any better? Puzzles and...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/02/1143283/the-download-ai-puzzles-alpha-centauri-mission/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+        <article class="news-card">
+          <span class="news-date">أوائل يوليو 2026</span>
+          <h2>Anthropic تبحث تطوير شريحة ذكاء اصطناعي مخصصة مع Samsung</h2>
+          <p>
+            ذكرت تقارير أن Anthropic تجري نقاشات مبدئية مع Samsung لتطوير شريحة ذكاء اصطناعي خاصة بها، في إطار توجه عام لدى شركات الذكاء الاصطناعي نحو بناء بنية تحتية مستقلة بدل الاعتماد الكلي على موردي الرقائق التقليديين.
+          </p>
+          <div class="news-source">
+            <a href="https://followict.news/" target="_blank" rel="noopener noreferrer">
+              المصدر: FollowICT
+            </a>
+          </div>
+        </article>
 
-        <div class="news-card">
-          <h2 class="news-title">How AI plotted an interstellar journey to Alpha Centauri</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-01</div>
-          <p class="news-summary">A nonprofit organization called the Fermi Explorer Mission announced today that it intends to launch a spacecraft to our nearest star system by the end of 2029.  It’s a hugely ambitious mission—if all goes well, the...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/01/1143247/ai-interstellar-journey-alpha-centauri/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+        <article class="news-card">
+          <span class="news-date">17–20 يوليو 2026</span>
+          <h2>مؤتمر WAIC 2026 في شنغهاي</h2>
+          <p>
+            استضافت مدينة شنغهاي الصينية المؤتمر العالمي للذكاء الاصطناعي (WAIC) 2026 إلى جانب اجتماع رفيع المستوى حول الحوكمة العالمية للذكاء الاصطناعي، بمشاركة واسعة ناقشت تعزيز التعاون الدولي في القطاع.
+          </p>
+          <div class="news-source">
+            <a href="https://arabic.cgtn.com/" target="_blank" rel="noopener noreferrer">
+              المصدر: CGTN عربي
+            </a>
+          </div>
+        </article>
 
-        <div class="news-card">
-          <h2 class="news-title">ChatGPT Ads passes $1B run rate in 200 days</h2>
-          <div class="news-meta">AI News • 2026-09-01</div>
-          <p class="news-summary">ChatGPT Ads has hit $1 billion in annualised revenue run rate in under 200 days, and OpenAI is expanding self-service ads to new regions. Tens of thousands of advertisers now use the platform and self-service access...</p>
-          <a class="news-link" href="https://www.artificialintelligence-news.com/news/chatgpt-ads-passes-1b-run-rate-in-200-days/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+        <article class="news-card">
+          <span class="news-date">14 يوليو 2026</span>
+          <h2>OpenAI تقر بمشاكل في إطلاق ChatGPT Work وGPT-5.6 Sol</h2>
+          <p>
+            اعترفت OpenAI بوجود عيوب مصاحبة لإطلاق منتجَي ChatGPT Work وGPT-5.6 Sol، شملت استهلاكًا مفرطًا للموارد ومشكلات في واجهة الاستخدام، إضافة إلى تقارير عن حالات حذف بيانات غير مقصود.
+          </p>
+          <div class="news-source">
+            <a href="https://aismartprompts.com/news/" target="_blank" rel="noopener noreferrer">
+              المصدر: AI Smart Prompts
+            </a>
+          </div>
+        </article>
 
-        <div class="news-card">
-          <h2 class="news-title">Making the AI-powered case for legacy modernization</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-01</div>
-          <p class="news-summary">For years, legacy technology has been a problem companies knew they needed to solve, but one they often struggled to tackle. The cost, complexity, and risk of replacing business-critical systems could make modernization...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/01/1142180/making-the-ai-powered-case-for-legacy-modernization/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
+      </div>
+    </div>
+  </main>
 
-        <div class="news-card">
-          <h2 class="news-title">The Download: engineered microbes for crops, and OpenAI’s culture problem</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-01</div>
-          <p class="news-summary">This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. How engineered microbes could help feed the world’s crops Fertilizer is crucial...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/01/1143199/the-download-engineered-microbes-openai-safety-culture/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
-
-        <div class="news-card">
-          <h2 class="news-title">How engineered microbes could help feed the world’s crops</h2>
-          <div class="news-meta">MIT Technology Review • 2026-09-01</div>
-          <p class="news-summary">Fertilizer is crucial for the global food supply, but making it uses a lot of energy and produces a lot of emissions. Some companies hope microbes can help. A growing body of research shows that seeding the soil around...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/09/01/1143195/microbe-fertilizer-switch-bioworks/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
-
-        <div class="news-card">
-          <h2 class="news-title">Why MCP servers are becoming AI’s newest attack surface</h2>
-          <div class="news-meta">AI News • 2026-09-01</div>
-          <p class="news-summary">As AI adoption gathers pace, so does the evolution of the infrastructure that supports it. New standards and connectors keep appearing, and the ones that catch on spread through the ecosystem within months rather than...</p>
-          <a class="news-link" href="https://www.artificialintelligence-news.com/news/why-mcp-servers-are-becoming-ais-newest-attack-surface/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
-
-        <div class="news-card">
-          <h2 class="news-title">The Hugging Face hack could indicate cultural issues at OpenAI</h2>
-          <div class="news-meta">MIT Technology Review • 2026-08-31</div>
-          <p class="news-summary">This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. By now you’ve probably heard about last month’s major AI security incident, in...</p>
-          <a class="news-link" href="https://www.technologyreview.com/2026/08/31/1143180/hugging-face-hack-could-indicate-cultural-issues-at-openai/" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
-
-        <div class="news-card">
-          <h2 class="news-title">Enterprise AI&#x27;s real risk isn&#x27;t autonomous agents. It&#x27;s the complexity between them.</h2>
-          <div class="news-meta">AI | VentureBeat • 2026-08-27</div>
-          <p class="news-summary">Presented by Gravitee Agent complexity is the insidious shadow lurking inside enterprises right now that needs a light shone on it.That’s because enterprises don&#x27;t deploy a single agent and watch it run, they deploy...</p>
-          <a class="news-link" href="https://venturebeat.com/ai/enterprise-ais-real-risk-isnt-autonomous-agents-its-the-complexity-between-them" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
-
-        <div class="news-card">
-          <h2 class="news-title">When agents act on their own, governance has to live in the data layer</h2>
-          <div class="news-meta">AI | VentureBeat • 2026-08-27</div>
-          <p class="news-summary">Presented by EDB As enterprises give AI agents more autonomy — the ability to plan, decide, and act across systems without a human approving each step — a hard question moves to the center of every architecture review:...</p>
-          <a class="news-link" href="https://venturebeat.com/security/when-agents-act-on-their-own-governance-has-to-live-in-the-data-layer" target="_blank" rel="noopener noreferrer">اقرأ الخبر كاملاً ←</a>
-        </div>
-</div>
-
-<footer>
-  &copy; 2026 جميع الحقوق محفوظة.
-</footer>
+  <footer>
+    <p>
+      هذه الصفحة جزء من الموقع —
+      <a href="index.html">العودة للرئيسية</a>
+    </p>
+  </footer>
 
 </body>
 </html>

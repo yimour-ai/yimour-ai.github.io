@@ -144,7 +144,7 @@ def build_page(items):
 <meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول."
 <meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://yimour-ai.github.io/news.html">
+<link rel="canonical" href="https://aziz680-blep.github.io/ai-wold/news.html">
 <style>
   * {{ box-sizing: border-box; }}
   body {{
