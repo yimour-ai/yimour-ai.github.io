@@ -2,8 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 generate_news.py
-يجيب آخر أخبار الذكاء الاصطناعي من مصادر RSS ويبني ملف news.html
+يجيب آخر أخبار الذكاء الاصطناعي من مصادر RSS متعددة ويبني ملف news.html
 بنفس ستايل الموقع (Arial + بطاقات بيضاء + أزرق #2563eb).
+
+مميزات هاد النسخة المصححة:
+- إصلاح خطأ في وسم <meta description> كان يكسر صفحة HTML.
+- تنويع حقيقي للمصادر: بحساب عدد أقصى من كل مصدر بحيث ما يهيمنش مصدر واحد.
+- حذف الأخبار المكررة (نفس العنوان تقريبًا) حتى إذا جات من أكثر من مصدر.
+- User-Agent مخصص باش بعض المواقع ما ترفضش الطلب.
+- ترتيب نهائي بالتاريخ الأحدث أولاً بعد التنويع.
 
 الاستخدام:
     pip install feedparser --break-system-packages
@@ -15,6 +22,7 @@ generate_news.py
 
 import feedparser
 import html
+import re
 from datetime import datetime, timezone
 
 # --------- إعدادات ---------
@@ -24,20 +32,28 @@ RSS_FEEDS = [
     "https://venturebeat.com/category/ai/feed/",
     "https://www.artificialintelligence-news.com/feed/",
     "https://www.technologyreview.com/feed/",
+    "https://www.wired.com/feed/tag/ai/latest/rss",
+    "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
 ]
 
 MAX_ARTICLES = 15          # أقصى عدد أخبار تظهر في الصفحة
+MAX_PER_SOURCE = 4         # أقصى عدد أخبار من نفس المصدر (لضمان التنويع)
 MAX_DESC_CHARS = 220       # طول الملخص المعروض لكل خبر
 OUTPUT_FILE = "news.html"
 PAGE_TITLE = "أخبار الذكاء الاصطناعي"
 
+FEEDPARSER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+)
+
 # --------- جلب الأخبار ---------
 
 def fetch_all_news():
-    items = []
+    all_items = []
     for url in RSS_FEEDS:
         try:
-            feed = feedparser.parse(url)
+            feed = feedparser.parse(url, agent=FEEDPARSER_AGENT)
             source_name = feed.feed.get("title", "مصدر خارجي")
             for entry in feed.entries[:10]:
                 title = entry.get("title", "").strip()
@@ -48,7 +64,7 @@ def fetch_all_news():
                 pub_date = parse_date(published)
 
                 if title and link:
-                    items.append({
+                    all_items.append({
                         "title": title,
                         "link": link,
                         "summary": summary,
@@ -59,17 +75,68 @@ def fetch_all_news():
         except Exception as e:
             print(f"تحذير: تعذر جلب {url}: {e}")
 
-    items.sort(key=lambda x: x["sort_key"], reverse=True)
-    return items[:MAX_ARTICLES]
+    all_items = dedupe_items(all_items)
+    diverse_items = diversify_items(all_items)
+    return diverse_items[:MAX_ARTICLES]
+
+
+def normalize_title(title):
+    """تبسيط العنوان لمقارنته وكشف التكرار (حتى لو فيه اختلاف بسيط)."""
+    t = title.lower().strip()
+    t = re.sub(r"[^\w\s]", "", t)
+    t = re.sub(r"\s+", " ", t)
+    return t
+
+
+def dedupe_items(items):
+    """يحذف الأخبار المكررة اللي عندها نفس العنوان تقريبًا من مصادر مختلفة."""
+    seen_titles = set()
+    unique = []
+    for item in items:
+        key = normalize_title(item["title"])
+        if key in seen_titles:
+            continue
+        seen_titles.add(key)
+        unique.append(item)
+    return unique
+
+
+def diversify_items(items):
+    """
+    يرتب الأخبار بالتاريخ الأحدث أولاً، لكن يحدد عدد أقصى من نفس المصدر
+    (MAX_PER_SOURCE) حتى ما تهيمنش صحيفة واحدة على الصفحة.
+    """
+    items_sorted = sorted(items, key=lambda x: x["sort_key"], reverse=True)
+
+    source_counts = {}
+    diverse = []
+    leftovers = []
+
+    for item in items_sorted:
+        src = item["source"]
+        count = source_counts.get(src, 0)
+        if count < MAX_PER_SOURCE:
+            diverse.append(item)
+            source_counts[src] = count + 1
+        else:
+            leftovers.append(item)
+
+    # إذا ما وصلناش للعدد المطلوب، نكملو من leftovers (الأحدث أولاً)
+    if len(diverse) < MAX_ARTICLES:
+        diverse.extend(leftovers[: MAX_ARTICLES - len(diverse)])
+
+    # إعادة الترتيب النهائي بالتاريخ
+    diverse.sort(key=lambda x: x["sort_key"], reverse=True)
+    return diverse
 
 
 def clean_summary(raw_html):
-    import re
     text = re.sub(r"<[^>]+>", "", raw_html or "")
     text = html.unescape(text).strip()
     if len(text) > MAX_DESC_CHARS:
         text = text[:MAX_DESC_CHARS].rsplit(" ", 1)[0] + "..."
     return text
+
 
 def parse_date(date_str):
     if not date_str:
@@ -79,33 +146,19 @@ def parse_date(date_str):
         "%a, %d %b %Y %H:%M:%S %z",
         "%a, %d %b %Y %H:%M:%S %Z",
         "%Y-%m-%dT%H:%M:%S%z",
+        "%Y-%m-%dT%H:%M:%S.%f%z",
     ]
 
     for fmt in formats:
         try:
             dt = datetime.strptime(date_str, fmt)
-
             # توحيد جميع التواريخ إلى UTC وبدون timezone
             if dt.tzinfo is not None:
                 dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
-
             return dt
-
         except ValueError:
             continue
 
-    return None
-
-    formats = [
-        "%a, %d %b %Y %H:%M:%S %z",
-        "%a, %d %b %Y %H:%M:%S %Z",
-        "%Y-%m-%dT%H:%M:%S%z",
-    ]
-    for fmt in formats:
-        try:
-            return datetime.strptime(date_str, fmt)
-        except ValueError:
-            continue
     return None
 
 
@@ -141,10 +194,9 @@ def build_page(items):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>{PAGE_TITLE}</title>
-<meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول."
 <meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://aziz680-blep.github.io/ai-wold/news.html">
+<link rel="canonical" href="https://yimour-ai.github.io/news.html">
 <style>
   * {{ box-sizing: border-box; }}
   body {{
@@ -245,7 +297,7 @@ def build_page(items):
 def main():
     print("جاري جلب الأخبار...")
     items = fetch_all_news()
-    print(f"تم جلب {len(items)} خبر.")
+    print(f"تم جلب {len(items)} خبر (بعد التنويع وحذف التكرار).")
 
     page = build_page(items)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
