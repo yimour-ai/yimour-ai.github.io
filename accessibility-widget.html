@@ -1,226 +1,229 @@
-<!-- =========================
-     أداة إمكانية الوصول
-     خفيفة ومتجاوبة مع الهاتف
-     ========================= --><div class="accessibility-widget" id="accessibilityWidget">  <!-- زر فتح الأداة --><button
+<!-- Accessibility Widget - Yimour AI --><div id="accessibility-widget" class="accessibility-widget" dir="rtl" aria-label="أداة إمكانية الوصول"><button
 type="button"
 class="accessibility-toggle"
-id="accessibilityToggle"
-aria-label="فتح خيارات إمكانية الوصول"
+id="accessibility-toggle"
 aria-expanded="false"
-aria-controls="accessibilityPanel">
+aria-controls="accessibility-panel"
+aria-label="فتح أدوات إمكانية الوصول">
 ♿
 </button>
 
-  <!-- لوحة الخيارات -->  <div
-    class="accessibility-panel"
-    id="accessibilityPanel"
-    hidden
-    aria-label="خيارات إمكانية الوصول"><div class="accessibility-title">
+  <div id="accessibility-panel" class="accessibility-panel" hidden><div class="accessibility-title">
   <span>إمكانية الوصول</span>
-
   <button
     type="button"
     class="accessibility-close"
-    id="accessibilityClose"
-    aria-label="إغلاق خيارات إمكانية الوصول">
+    id="accessibility-close"
+    aria-label="إغلاق أدوات إمكانية الوصول">
     ×
   </button>
 </div>
 
 <div class="accessibility-buttons">
 
-  <button
-    type="button"
-    id="fontIncrease"
-    aria-label="تكبير حجم النص">
+  <button type="button" id="font-increase" aria-label="تكبير الخط">
     A+
   </button>
 
-  <button
-    type="button"
-    id="fontDecrease"
-    aria-label="تصغير حجم النص">
-    A−
+  <button type="button" id="font-decrease" aria-label="تصغير الخط">
+    A-
   </button>
 
-  <button
-    type="button"
-    id="grayscaleToggle"
-    aria-label="تفعيل الأبيض والأسود"
-    aria-pressed="false">
-    ⚫ أبيض وأسود
+  <button type="button" id="grayscale-toggle">
+    ⚫⚪ أبيض وأسود
   </button>
 
-  <button
-    type="button"
-    id="contrastToggle"
-    aria-label="تفعيل التباين العالي"
-    aria-pressed="false">
+  <button type="button" id="contrast-toggle">
     ◐ تباين عالٍ
   </button>
 
-  <button
-    type="button"
-    id="speechToggle"
-    aria-label="قراءة محتوى الصفحة">
+  <button type="button" id="read-toggle">
     🔊 قراءة المقال
   </button>
 
-  <button
-    type="button"
-    id="accessibilityReset"
-    aria-label="إعادة إعدادات إمكانية الوصول">
+  <button type="button" id="reset-accessibility">
     ↺ إعادة الضبط
   </button>
 
 </div>
 
+<div class="accessibility-status" id="accessibility-status" aria-live="polite"></div>
+
   </div>
 </div><style>
-/* =========================
+/* ==============================
    Accessibility Widget
-   ========================= */
+   Yimour AI
+   ============================== */
 
 .accessibility-widget {
   position: fixed;
   left: 16px;
-  bottom: 16px;
-  z-index: 9999;
+  bottom: 85px;
+  z-index: 99999;
   font-family: Arial, sans-serif;
 }
 
-/* زر ♿ الرئيسي */
+/* زر فتح الأداة */
 .accessibility-toggle {
-  width: 50px;
-  height: 50px;
-  border: 0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #ccc;
   border-radius: 50%;
-  background: #2563eb;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,.20);
-  transition: transform .2s ease;
-}
-
-.accessibility-toggle:hover {
-  transform: scale(1.05);
-}
-
-.accessibility-toggle:focus-visible,
-.accessibility-panel button:focus-visible {
-  outline: 3px solid #f59e0b;
-  outline-offset: 2px;
-}
-
-/* لوحة الخيارات */
-.accessibility-panel {
-  position: absolute;
-  left: 0;
-  bottom: 60px;
-  width: 260px;
   background: #fff;
   color: #111;
-  border: 1px solid #ddd;
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 8px 30px rgba(0,0,0,.18);
+  font-size: 23px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
-/* عنوان اللوحة */
+.accessibility-toggle:hover,
+.accessibility-toggle:focus {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,.25);
+  outline: 3px solid rgba(0,123,255,.25);
+}
+
+/* لوحة الأدوات */
+.accessibility-panel {
+  width: 230px;
+  margin-bottom: 10px;
+  padding: 12px;
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.2);
+}
+
+/* عنوان الأداة */
 .accessibility-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
-  font-size: 16px;
   font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
 }
 
 .accessibility-close {
-  width: 30px !important;
-  min-width: 30px !important;
-  height: 30px;
-  padding: 0 !important;
-  border-radius: 50% !important;
-  font-size: 20px !important;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #333;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.accessibility-close:hover,
+.accessibility-close:focus {
+  background: #eee;
 }
 
 /* الأزرار */
 .accessibility-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
 }
 
 .accessibility-buttons button {
-  min-height: 42px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background: #f8fafc;
-  color: #111827;
-  padding: 7px 6px;
+  min-height: 38px;
+  padding: 6px 7px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  background: #f7f7f7;
+  color: #111;
   font-size: 13px;
   cursor: pointer;
-  transition: background .2s ease, transform .15s ease;
+  transition: background .2s ease, transform .1s ease;
 }
 
-.accessibility-buttons button:hover {
-  background: #e5e7eb;
+.accessibility-buttons button:hover,
+.accessibility-buttons button:focus {
+  background: #e9e9e9;
+  outline: 2px solid rgba(0,123,255,.25);
 }
 
 .accessibility-buttons button:active {
   transform: scale(.97);
 }
 
-/* =========================
-   الوضع عالي التباين
-   ========================= */
+/* حالة الأداة */
+.accessibility-status {
+  min-height: 18px;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+}
 
-body.accessibility-high-contrast {
+/* ==============================
+   High Contrast
+   ============================== */
+
+body.high-contrast {
   background: #000 !important;
   color: #fff !important;
 }
 
-body.accessibility-high-contrast header,
-body.accessibility-high-contrast nav,
-body.accessibility-high-contrast main,
-body.accessibility-high-contrast section,
-body.accessibility-high-contrast article,
-body.accessibility-high-contrast footer,
-body.accessibility-high-contrast .card {
-  background: #000 !important;
-  color: #fff !important;
-}
-
-body.accessibility-high-contrast a {
+body.high-contrast a {
   color: #00ffff !important;
-  text-decoration: underline !important;
 }
 
-body.accessibility-high-contrast button {
+body.high-contrast button,
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
   background: #000 !important;
   color: #fff !important;
   border-color: #fff !important;
 }
 
-/* =========================
-   التدرج الرمادي
-   ========================= */
+body.high-contrast header,
+body.high-contrast nav,
+body.high-contrast footer,
+body.high-contrast section,
+body.high-contrast article,
+body.high-contrast .card,
+body.high-contrast .container {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
 
-html.accessibility-grayscale {
+/* ==============================
+   Grayscale
+   ============================== */
+
+body.accessibility-grayscale {
   filter: grayscale(100%);
 }
 
-/* =========================
-   تحسين الهاتف
-   ========================= */
+/* لا نطبق التأثير على أداة إمكانية الوصول نفسها */
+.accessibility-widget {
+  filter: none !important;
+}
 
-@media (max-width: 600px) {
+
+/* ==============================
+   Mobile
+   ============================== */
+
+@media (max-width: 480px) {
 
   .accessibility-widget {
-    left: 10px;
-    bottom: 10px;
+    left: 12px;
+    bottom: 80px;
   }
 
   .accessibility-toggle {
@@ -230,14 +233,14 @@ html.accessibility-grayscale {
   }
 
   .accessibility-panel {
-    width: min(260px, calc(100vw - 30px));
-    bottom: 55px;
+    width: min(230px, calc(100vw - 32px));
   }
 
   .accessibility-buttons button {
     font-size: 12px;
   }
 }
+
 
 /* احترام إعداد تقليل الحركة */
 @media (prefers-reduced-motion: reduce) {
@@ -249,218 +252,311 @@ html.accessibility-grayscale {
 }
 </style><script>
 (function () {
-
   "use strict";
 
-  const body = document.body;
-  const html = document.documentElement;
+  /* ==============================
+     إعدادات
+     ============================== */
 
-  const toggle = document.getElementById("accessibilityToggle");
-  const panel = document.getElementById("accessibilityPanel");
-  const close = document.getElementById("accessibilityClose");
+  const STORAGE_KEY = "yimourAccessibilitySettings";
 
-  const increase = document.getElementById("fontIncrease");
-  const decrease = document.getElementById("fontDecrease");
+  const DEFAULT_SETTINGS = {
+    fontSize: 100,
+    grayscale: false,
+    contrast: false
+  };
 
-  const grayscale = document.getElementById("grayscaleToggle");
-  const contrast = document.getElementById("contrastToggle");
+  let settings = loadSettings();
+  let speechActive = false;
 
-  const speech = document.getElementById("speechToggle");
-  const reset = document.getElementById("accessibilityReset");
 
-  const STORAGE_KEY = "siteAccessibilitySettings";
+  /* ==============================
+     العناصر
+     ============================== */
 
-  let fontLevel = 0;
+  const widget = document.getElementById("accessibility-widget");
+  const toggleButton = document.getElementById("accessibility-toggle");
+  const panel = document.getElementById("accessibility-panel");
+  const closeButton = document.getElementById("accessibility-close");
 
-  /* فتح وإغلاق اللوحة */
-  function openPanel() {
-    panel.hidden = false;
-    toggle.setAttribute("aria-expanded", "true");
-  }
+  const fontIncrease = document.getElementById("font-increase");
+  const fontDecrease = document.getElementById("font-decrease");
 
-  function closePanel() {
+  const grayscaleToggle = document.getElementById("grayscale-toggle");
+  const contrastToggle = document.getElementById("contrast-toggle");
+
+  const readToggle = document.getElementById("read-toggle");
+  const resetButton = document.getElementById("reset-accessibility");
+
+  const status = document.getElementById("accessibility-status");
+
+
+  /* ==============================
+     فتح وإغلاق الأداة
+     ============================== */
+
+  toggleButton.addEventListener("click", function () {
+
+    const isOpen = !panel.hidden;
+
+    panel.hidden = isOpen;
+
+    toggleButton.setAttribute(
+      "aria-expanded",
+      String(!isOpen)
+    );
+  });
+
+
+  closeButton.addEventListener("click", function () {
+
     panel.hidden = true;
-    toggle.setAttribute("aria-expanded", "false");
-  }
 
-  toggle.addEventListener("click", function () {
-    if (panel.hidden) {
-      openPanel();
-    } else {
-      closePanel();
-    }
+    toggleButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    toggleButton.focus();
   });
 
-  close.addEventListener("click", closePanel);
 
-
-  /* =========================
+  /* ==============================
      حجم الخط
-     ========================= */
+     ============================== */
 
-  function applyFontSize() {
+  fontIncrease.addEventListener("click", function () {
 
-    const sizes = [
-      "100%",
-      "110%",
-      "120%",
-      "130%",
-      "140%"
-    ];
-
-    body.style.fontSize = sizes[fontLevel];
-
-  }
-
-  increase.addEventListener("click", function () {
-
-    if (fontLevel < 4) {
-      fontLevel++;
-      applyFontSize();
+    if (settings.fontSize < 150) {
+      settings.fontSize += 10;
+      applySettings();
       saveSettings();
+
+      showStatus("تم تكبير الخط");
     }
-
-  });
-
-  decrease.addEventListener("click", function () {
-
-    if (fontLevel > 0) {
-      fontLevel--;
-      applyFontSize();
-      saveSettings();
-    }
-
   });
 
 
-  /* =========================
+  fontDecrease.addEventListener("click", function () {
+
+    if (settings.fontSize > 80) {
+      settings.fontSize -= 10;
+      applySettings();
+      saveSettings();
+
+      showStatus("تم تصغير الخط");
+    }
+  });
+
+
+  /* ==============================
      الأبيض والأسود
-     ========================= */
+     ============================== */
 
-  grayscale.addEventListener("click", function () {
+  grayscaleToggle.addEventListener("click", function () {
 
-    html.classList.toggle("accessibility-grayscale");
+    settings.grayscale = !settings.grayscale;
 
-    const active =
-      html.classList.contains("accessibility-grayscale");
-
-    grayscale.setAttribute("aria-pressed", active);
-
+    applySettings();
     saveSettings();
 
+    showStatus(
+      settings.grayscale
+        ? "تم تفعيل الأبيض والأسود"
+        : "تم إيقاف الأبيض والأسود"
+    );
   });
 
 
-  /* =========================
+  /* ==============================
      التباين العالي
-     ========================= */
+     ============================== */
 
-  contrast.addEventListener("click", function () {
+  contrastToggle.addEventListener("click", function () {
 
-    body.classList.toggle("accessibility-high-contrast");
+    settings.contrast = !settings.contrast;
 
-    const active =
-      body.classList.contains("accessibility-high-contrast");
-
-    contrast.setAttribute("aria-pressed", active);
-
+    applySettings();
     saveSettings();
 
+    showStatus(
+      settings.contrast
+        ? "تم تفعيل التباين العالي"
+        : "تم إيقاف التباين العالي"
+    );
   });
 
 
-  /* =========================
+  /* ==============================
      القراءة الصوتية
-     ========================= */
+     ============================== */
 
-  speech.addEventListener("click", function () {
+  readToggle.addEventListener("click", function () {
 
     if (!("speechSynthesis" in window)) {
 
-      alert("متصفحك لا يدعم القراءة الصوتية.");
+      showStatus("متصفحك لا يدعم القراءة الصوتية");
 
       return;
     }
 
-    /* إذا كانت القراءة تعمل → إيقاف */
-    if (window.speechSynthesis.speaking) {
 
-      window.speechSynthesis.cancel();
+    /* إيقاف القراءة */
+    if (speechActive || speechSynthesis.speaking) {
 
-      speech.textContent = "🔊 قراءة المقال";
+      speechSynthesis.cancel();
 
-      return;
-    }
+      speechActive = false;
 
-    /*
-      نفضل قراءة المقال فقط.
-      وإذا لم يوجد article نقرأ المحتوى الرئيسي.
-    */
+      readToggle.textContent = "🔊 قراءة المقال";
 
-    const article = document.querySelector("article");
-    const main = document.querySelector("main");
-
-    const source = article || main;
-
-    if (!source) {
-
-      alert("لم يتم العثور على محتوى مناسب للقراءة.");
+      showStatus("تم إيقاف القراءة");
 
       return;
     }
 
-    const text = source.innerText.trim();
+
+    /* العثور على المقال */
+    const article =
+      document.querySelector("article") ||
+      document.querySelector(".article-content") ||
+      document.querySelector(".post-content") ||
+      document.querySelector("main");
+
+
+    if (!article) {
+
+      showStatus("لم يتم العثور على محتوى المقال");
+
+      return;
+    }
+
+
+    const text = article.innerText.trim();
+
 
     if (!text) {
 
-      alert("لا يوجد نص متاح للقراءة.");
+      showStatus("لا يوجد نص لقراءته");
 
       return;
     }
 
+
+    /* إنشاء القراءة */
     const utterance =
       new SpeechSynthesisUtterance(text);
 
     utterance.lang = "ar-SA";
     utterance.rate = 0.9;
     utterance.pitch = 1;
+    utterance.volume = 1;
+
 
     utterance.onstart = function () {
-      speech.textContent = "⏹ إيقاف القراءة";
+
+      speechActive = true;
+
+      readToggle.textContent = "⏹ إيقاف القراءة";
+
+      showStatus("جاري قراءة المقال...");
     };
+
 
     utterance.onend = function () {
-      speech.textContent = "🔊 قراءة المقال";
+
+      speechActive = false;
+
+      readToggle.textContent = "🔊 قراءة المقال";
+
+      showStatus("انتهت قراءة المقال");
     };
+
 
     utterance.onerror = function () {
-      speech.textContent = "🔊 قراءة المقال";
+
+      speechActive = false;
+
+      readToggle.textContent = "🔊 قراءة المقال";
+
+      showStatus("تعذر تشغيل القراءة الصوتية");
     };
 
-    window.speechSynthesis.speak(utterance);
+
+    speechSynthesis.cancel();
+
+    speechSynthesis.speak(utterance);
 
   });
 
 
-  /* =========================
+  /* ==============================
+     إعادة الضبط
+     ============================== */
+
+  resetButton.addEventListener("click", function () {
+
+    speechSynthesis.cancel();
+
+    speechActive = false;
+
+    settings = {
+      ...DEFAULT_SETTINGS
+    };
+
+    applySettings();
+    saveSettings();
+
+    readToggle.textContent = "🔊 قراءة المقال";
+
+    showStatus("تمت إعادة إعدادات إمكانية الوصول");
+
+  });
+
+
+  /* ==============================
+     تطبيق الإعدادات
+     ============================== */
+
+  function applySettings() {
+
+    /*
+     * نستخدم CSS variable بدل تغيير
+     * حجم body مباشرة حتى لا تتأثر
+     * أداة إمكانية الوصول نفسها.
+     */
+
+    document.documentElement.style.setProperty(
+      "--accessibility-font-scale",
+      settings.fontSize / 100
+    );
+
+
+    document.body.style.fontSize =
+      settings.fontSize + "%";
+
+
+    document.body.classList.toggle(
+      "accessibility-grayscale",
+      settings.grayscale
+    );
+
+
+    document.body.classList.toggle(
+      "high-contrast",
+      settings.contrast
+    );
+
+  }
+
+
+  /* ==============================
      حفظ الإعدادات
-     ========================= */
+     ============================== */
 
   function saveSettings() {
 
     try {
-
-      const settings = {
-
-        fontLevel: fontLevel,
-
-        grayscale:
-          html.classList.contains("accessibility-grayscale"),
-
-        contrast:
-          body.classList.contains("accessibility-high-contrast")
-
-      };
 
       localStorage.setItem(
         STORAGE_KEY,
@@ -468,15 +564,16 @@ html.accessibility-grayscale {
       );
 
     } catch (error) {
-      /* تجاهل الخطأ إذا كان التخزين غير متاح */
-    }
 
+      /* تجاهل الخطأ إذا كان localStorage غير متاح */
+
+    }
   }
 
 
-  /* =========================
+  /* ==============================
      تحميل الإعدادات
-     ========================= */
+     ============================== */
 
   function loadSettings() {
 
@@ -485,124 +582,67 @@ html.accessibility-grayscale {
       const saved =
         localStorage.getItem(STORAGE_KEY);
 
-      if (!saved) return;
-
-      const settings =
-        JSON.parse(saved);
-
-      if (
-        typeof settings.fontLevel === "number" &&
-        settings.fontLevel >= 0 &&
-        settings.fontLevel <= 4
-      ) {
-
-        fontLevel = settings.fontLevel;
-        applyFontSize();
-
+      if (!saved) {
+        return {
+          ...DEFAULT_SETTINGS
+        };
       }
 
-      if (settings.grayscale) {
 
-        html.classList.add(
-          "accessibility-grayscale"
-        );
+      const parsed = JSON.parse(saved);
 
-        grayscale.setAttribute(
-          "aria-pressed",
-          "true"
-        );
-
-      }
-
-      if (settings.contrast) {
-
-        body.classList.add(
-          "accessibility-high-contrast"
-        );
-
-        contrast.setAttribute(
-          "aria-pressed",
-          "true"
-        );
-
-      }
+      return {
+        ...DEFAULT_SETTINGS,
+        ...parsed
+      };
 
     } catch (error) {
-      /* تجاهل البيانات التالفة */
+
+      return {
+        ...DEFAULT_SETTINGS
+      };
     }
+  }
+
+
+  /* ==============================
+     رسالة الحالة
+     ============================== */
+
+  function showStatus(message) {
+
+    status.textContent = message;
+
+    clearTimeout(showStatus.timer);
+
+    showStatus.timer = setTimeout(function () {
+
+      status.textContent = "";
+
+    }, 2500);
 
   }
 
 
-  /* =========================
-     إعادة الإعدادات
-     ========================= */
+  /* ==============================
+     تطبيق الإعدادات عند التحميل
+     ============================== */
 
-  reset.addEventListener("click", function () {
+  applySettings();
 
-    fontLevel = 0;
 
-    body.style.fontSize = "";
+  /* ==============================
+     إيقاف القراءة عند مغادرة الصفحة
+     ============================== */
 
-    html.classList.remove(
-      "accessibility-grayscale"
-    );
-
-    body.classList.remove(
-      "accessibility-high-contrast"
-    );
-
-    grayscale.setAttribute(
-      "aria-pressed",
-      "false"
-    );
-
-    contrast.setAttribute(
-      "aria-pressed",
-      "false"
-    );
+  window.addEventListener("beforeunload", function () {
 
     if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
-
-    speech.textContent = "🔊 قراءة المقال";
-
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch (error) {}
-
-  });
-
-
-  /* إغلاق اللوحة عند الضغط خارجها */
-  document.addEventListener("click", function (event) {
-
-    if (
-      !document.getElementById(
-        "accessibilityWidget"
-      ).contains(event.target)
-    ) {
-
-      closePanel();
-
+      speechSynthesis.cancel();
     }
 
   });
 
-
-  /* زر Escape لإغلاق اللوحة */
-  document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
-      closePanel();
-    }
-
-  });
-
-
-  /* تشغيل الإعدادات المحفوظة */
-  loadSettings();
 
 })();
 </script>
