@@ -1,64 +1,115 @@
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("accessibility-widget.html")
-    .then(response => {
-      if (!response.ok) throw new Error("تعذر تحميل أداة إمكانية الوصول");
-      return response.text();
+(function () {
+  "use strict";
+
+  function loadAccessibilityWidget() {
+    if (document.getElementById("accessibility-widget")) {
+      return;
+    }
+
+    fetch("accessibility-widget.html?v=2", {
+      cache: "no-store"
     })
-    .then(html => {
-      const container = document.createElement("div");
-      container.innerHTML = html;
-      document.body.appendChild(container);
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error(
+            "تعذر تحميل accessibility-widget.html: HTTP " +
+              response.status
+          );
+        }
 
-      const script = container.querySelector("script");
-      if (script) {
-        const newScript = document.createElement("script");
-        newScript.textContent = script.textContent;
-        document.body.appendChild(newScript);
-      }
+        return response.text();
+      })
+      .then(function (html) {
+        var container = document.createElement("div");
+        container.id = "accessibility-widget-container";
+        container.innerHTML = html;
 
-      /* زر الرجوع إلى بداية الصفحة */
-      const backToTop = document.createElement("button");
-      backToTop.type = "button";
-      backToTop.id = "backToTop";
-      backToTop.setAttribute("aria-label", "الرجوع إلى بداية الصفحة");
-      backToTop.title = "الرجوع إلى بداية الصفحة";
-      backToTop.textContent = "↑";
+        document.body.appendChild(container);
 
-      Object.assign(backToTop.style, {
-        position: "fixed",
-        right: "16px",
-        bottom: "16px",
-        width: "50px",
-        height: "50px",
-        border: "0",
-        borderRadius: "50%",
-        background: "#2563eb",
-        color: "#fff",
-        fontSize: "25px",
-        fontWeight: "bold",
-        cursor: "pointer",
-        zIndex: "9998",
-        boxShadow: "0 4px 14px rgba(0,0,0,.20)",
-        display: "none",
-        alignItems: "center",
-        justifyContent: "center"
-      });
+        var scripts = container.querySelectorAll("script");
 
-      document.body.appendChild(backToTop);
+        scripts.forEach(function (oldScript) {
+          var newScript = document.createElement("script");
 
-      window.addEventListener("scroll", function () {
-        backToTop.style.display =
-          window.scrollY > 300 ? "flex" : "none";
-      });
+          if (oldScript.src) {
+            newScript.src = oldScript.src;
+          } else {
+            newScript.textContent = oldScript.textContent;
+          }
 
-      backToTop.addEventListener("click", function () {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
+          document.body.appendChild(newScript);
+          oldScript.remove();
         });
+
+        createBackToTop();
+      })
+      .catch(function (error) {
+        console.error("Accessibility Widget:", error);
       });
-    })
-    .catch(error => {
-      console.error("Accessibility Widget:", error);
+  }
+
+  function createBackToTop() {
+    if (document.getElementById("backToTop")) {
+      return;
+    }
+
+    var button = document.createElement("button");
+
+    button.type = "button";
+    button.id = "backToTop";
+    button.setAttribute(
+      "aria-label",
+      "الرجوع إلى بداية الصفحة"
+    );
+    button.title = "الرجوع إلى بداية الصفحة";
+    button.textContent = "↑";
+
+    Object.assign(button.style, {
+      position: "fixed",
+      right: "16px",
+      bottom: "16px",
+      width: "50px",
+      height: "50px",
+      border: "0",
+      borderRadius: "50%",
+      background: "#2563eb",
+      color: "#fff",
+      fontSize: "25px",
+      fontWeight: "bold",
+      cursor: "pointer",
+      zIndex: "9998",
+      boxShadow: "0 4px 14px rgba(0,0,0,.20)",
+      display: "none",
+      alignItems: "center",
+      justifyContent: "center"
     });
-});
+
+    document.body.appendChild(button);
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        button.style.display =
+          window.scrollY > 300 ? "flex" : "none";
+      },
+      { passive: true }
+    );
+
+    button.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      loadAccessibilityWidget,
+      { once: true }
+    );
+  } else {
+    loadAccessibilityWidget();
+  }
+})();
