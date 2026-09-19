@@ -103,32 +103,31 @@ def dedupe_items(items):
 
 def diversify_items(items):
     """
-    يرتب الأخبار بالتاريخ الأحدث أولاً، لكن يحدد عدد أقصى من نفس المصدر
-    (MAX_PER_SOURCE) حتى ما تهيمنش صحيفة واحدة على الصفحة.
+    تنويع الأخبار مع احترام الحد الأقصى لكل مصدر.
     """
-    items_sorted = sorted(items, key=lambda x: x["sort_key"], reverse=True)
+    items_sorted = sorted(
+        items,
+        key=lambda x: x["sort_key"],
+        reverse=True
+    )
 
     source_counts = {}
     diverse = []
-    leftovers = []
 
     for item in items_sorted:
         src = item["source"]
         count = source_counts.get(src, 0)
-        if count < MAX_PER_SOURCE:
-            diverse.append(item)
-            source_counts[src] = count + 1
-        else:
-            leftovers.append(item)
 
-    # إذا ما وصلناش للعدد المطلوب، نكملو من leftovers (الأحدث أولاً)
-    if len(diverse) < MAX_ARTICLES:
-        diverse.extend(leftovers[: MAX_ARTICLES - len(diverse)])
+        if count >= MAX_PER_SOURCE:
+            continue
 
-    # إعادة الترتيب النهائي بالتاريخ
-    diverse.sort(key=lambda x: x["sort_key"], reverse=True)
+        diverse.append(item)
+        source_counts[src] = count + 1
+
+        if len(diverse) >= MAX_ARTICLES:
+            break
+
     return diverse
-
 
 def clean_summary(raw_html):
     text = re.sub(r"<[^>]+>", "", raw_html or "")
@@ -193,10 +192,21 @@ def build_page(items):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{PAGE_TITLE}</title>
-<meta name="description" content="آخر أخبار وتطورات الذكاء الاصطناعي محدثة أولاً بأول.">
+<title>أخبار الذكاء الاصطناعي | آخر أخبار وتقنيات AI</title>
+<meta name="description" content="تابع آخر أخبار الذكاء الاصطناعي وتقنيات AI وتطوراتها من مصادر تقنية متعددة، مع تحديثات مستمرة.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://yimour-ai.github.io/news.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="أخبار الذكاء الاصطناعي | آخر أخبار وتقنيات AI">
+<meta property="og:description" content="تابع آخر أخبار الذكاء الاصطناعي وتقنيات AI وتطوراتها مع تحديثات مستمرة.">
+<meta property="og:url" content="https://yimour-ai.github.io/news.html">
+<meta property="og:site_name" content="عالم الذكاء الاصطناعي">
+<meta property="og:locale" content="ar_AR">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="أخبار الذكاء الاصطناعي | آخر أخبار وتقنيات AI">
+<meta name="twitter:description" content="آخر أخبار الذكاء الاصطناعي وتقنيات AI وتطوراتها من مصادر تقنية متعددة.">
 <style>
   * {{ box-sizing: border-box; }}
   body {{
