@@ -193,7 +193,7 @@ button:hover {
 </div>
 
 <script>
-function generatePrompt() {
+async function generatePrompt() {
     const idea = document.getElementById('idea').value.trim();
     const role = document.getElementById('role').value;
     const tone = document.getElementById('tone').value;
@@ -205,26 +205,63 @@ function generatePrompt() {
         return;
     }
 
-    const prompt =
-        "تصرف كـ " + role + ".\n\n" +
-        "المهمة: " + idea + "\n\n" +
-        "النبرة المطلوبة: " + tone + ".\n" +
-        "طول الإجابة: " + length + ".\n" +
-        "صيغة الإخراج: " + format + ".\n\n" +
-        "تأكد أن الناتج واضح، منظم، وخالٍ من أي حشو غير ضروري.";
+    const button = document.querySelector('button[onclick="generatePrompt()"]');
+    const resultBox = document.getElementById('result-box');
+    const resultText = document.getElementById('result-text');
 
-    document.getElementById('result-text').innerText = prompt;
-    document.getElementById('result-box').style.display = 'block';
-    document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+    const originalText = button.innerText;
+
+    button.disabled = true;
+    button.innerText = "جاري إنشاء البرومبت...";
+
+    resultText.innerText = "⏳ يتم إنشاء البرومبت بالذكاء الاصطناعي...";
+    resultBox.style.display = 'block';
+
+    try {
+        const response = await fetch('/api/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                articleText: idea,
+                role: role,
+                tone: tone,
+                length: length,
+                format: format
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'حدث خطأ أثناء إنشاء البرومبت');
+        }
+
+        resultText.innerText = data.result || 'لم يتم إنشاء نتيجة.';
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+
+    } catch (error) {
+        console.error('Generate prompt error:', error);
+        resultText.innerText = '❌ ' + error.message;
+    } finally {
+        button.disabled = false;
+        button.innerText = originalText;
+    }
 }
 
 function copyResult() {
     const text = document.getElementById('result-text').innerText;
+
     navigator.clipboard.writeText(text).then(() => {
         const btn = document.getElementById('copy-btn');
         const original = btn.innerText;
+
         btn.innerText = "تم النسخ ✓";
-        setTimeout(() => { btn.innerText = original; }, 1800);
+
+        setTimeout(() => {
+            btn.innerText = original;
+        }, 1800);
     });
 }
 </script>
