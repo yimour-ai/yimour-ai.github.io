@@ -218,7 +218,7 @@ async function generatePrompt() {
     resultBox.style.display = 'block';
 
     try {
-        const response = await fetch('/api/generate', {
+        const response = await fetch('https://yimour-ai-github-io.vercel.app/api/generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
