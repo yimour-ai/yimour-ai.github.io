@@ -60,8 +60,10 @@ ${articleText}
       const errText = await response.text();
       console.error('Groq API error:', errText);
 
-      return res.status(500).json({
-        error: 'فشل الاتصال بخدمة الذكاء الاصطناعي'
+      return res.status(response.status).json({
+        error: 'Groq API Error',
+        status: response.status,
+        details: errText
       });
     }
 
