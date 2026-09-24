@@ -23,11 +23,23 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "الذكاء الاصطناعي في التعليم العالي والجامعات | دليل عملي للمؤسسات",
+  "description": "دليل عملي يشرح كيفية تبني الجامعات والمؤسسات التعليمية للذكاء الاصطناعي، من الإرشاد الأكاديمي وتحليلات التعلم إلى دعم البحث العلمي، مع خطوات التطبيق وأهم التحديات.",
+  "inLanguage": "ar",
   "datePublished": "2026-08-01",
   "dateModified": "2026-08-30",
-  "author": { "@type": "Person", "name": "Abdelaziz" },
-  "publisher": { "@type": "Organization", "name": "عالم الذكاء الاصطناعي" },
-  "mainEntityOfPage": "https://yimour-ai.github.io/article12.html"
+  "author": {
+    "@type": "Person",
+    "name": "Abdelaziz"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "عالم الذكاء الاصطناعي",
+    "url": "https://yimour-ai.github.io/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yimour-ai.github.io/article12.html"
+  }
 }
 </script>
 
@@ -35,7 +47,12 @@
 body{font-family:Arial, sans-serif; background:#f5f7fb; color:#1f2937; margin:0; padding:0;}
 .container{max-width:800px; margin:0 auto; padding:24px;}
 .card{background:#ffffff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); padding:24px; margin-bottom:20px;}
-h1{color:#111827;}
+h1{
+color:#111827;
+font-size:2rem;
+line-height:1.5;
+margin:20px 0;
+}
 h2{color:#2563eb; margin-top:32px;}
 a{color:#2563eb; text-decoration:none;}
 a:hover{text-decoration:underline;}
@@ -47,6 +64,32 @@ a:hover{text-decoration:underline;}
 footer{background:#222; color:white; text-align:center; padding:20px; margin-top:20px;}
 footer a{color:#9cc3ff; text-decoration:none; margin:0 6px;}
 .site-link{color:#2563eb; font-weight:bold; text-decoration:none; display:inline-block; margin-bottom:10px;}
+@media (max-width:600px){
+    .container{
+        padding:15px 10px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    h1{
+        font-size:1.6rem;
+        line-height:1.5;
+    }
+
+    h2{
+        font-size:1.3rem;
+    }
+
+    h3{
+        font-size:1.1rem;
+    }
+
+    .related-list a{
+        padding:10px 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -109,7 +152,7 @@ footer a{color:#9cc3ff; text-decoration:none; margin:0 6px;}
 
 <h2>مقالات ذات صلة</h2>
 <div class="related-list">
-<a href="article5.html">الذكاء الاصطناعي في التعليم</a>
+<a href="article5.html">كيف تستخدم ChatGPT لكتابة محتوى احترافي؟</a>
 <a href="article7.html">ما هو التعلم الآلي؟</a>
 <a href="article9.html">أفضل أدوات الذكاء الاصطناعي</a>
 <a href="article10.html">مخاطر الذكاء الاصطناعي وأخلاقياته</a>
@@ -129,6 +172,6 @@ footer a{color:#9cc3ff; text-decoration:none; margin:0 6px;}
 </p>
 </footer>
 
-<script src="accessibility-loader.js"></script>
+<script src="accessibility-loader.js" defer></script>
 </body>
 </html>
