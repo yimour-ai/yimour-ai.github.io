@@ -6,49 +6,71 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { articleText, role, tone, length, format } = req.body;
+    const { articleText, role, tone, length, format, mode } = req.body || {};
 
-    if (!articleText || articleText.trim() === '') {
+    if (typeof articleText !== "string" || !articleText.trim()) {
       return res.status(400).json({
-        error: 'يرجى إدخال نص المقال أو الفكرة'
+        error: "يرجى إدخال نص المقال أو الفكرة"
       });
     }
 
-    const instructionPrompt = `أنت مساعد متخصص في تحويل الأفكار أو المقالات إلى برومبت (prompt) منظم واحترافي.
+    let instructionPrompt;
 
-المطلوب: حوّل النص التالي إلى برومبت جاهز للاستخدام، وليس إعادة كتابة للمقال نفسه.
+    if (mode === "content") {
+      instructionPrompt = `أنت كاتب محتوى عربي محترف.
 
-الدور المطلوب: ${role || 'غير محدد'}
-النبرة المطلوبة: ${tone || 'غير محددة'}
-الطول المطلوب للبرومبت الناتج: ${length || 'متوسط'}
-صيغة الإخراج: ${format || 'نص متصل'}
+المطلوب: اكتب المحتوى النهائي مباشرةً اعتمادًا على الفكرة أو النص أدناه. لا تكتب برومبت ولا تعليمات ولا تشرح ما ستفعله.
 
-النص/الفكرة الأصلية من المستخدم:
+الدور المطلوب: ${role || "كاتب محتوى"}
+النبرة: ${tone || "احترافية"}
+الطول: ${length || "متوسط"}
+صيغة الإخراج: ${format || "نص متصل"}
+
+الفكرة أو النص:
 """
 ${articleText}
 """
 
-اكتب فقط البرومبت النهائي المنظم، بدون أي شرح أو مقدمات.`;
+اكتب المحتوى النهائي باللغة العربية، مع تنظيم العناوين والفقرات عند الحاجة. لا تضف مقدمات عن طريقة عملك.`;
+
+    } else {
+      instructionPrompt = `أنت مساعد متخصص في إنشاء البرومبتات الاحترافية.
+
+حوّل الفكرة التالية إلى برومبت منظم وجاهز للاستخدام، ولا تكتب المحتوى النهائي نفسه.
+
+الدور المطلوب: ${role || "غير محدد"}
+النبرة: ${tone || "غير محددة"}
+الطول: ${length || "متوسط"}
+صيغة الإخراج: ${format || "نص متصل"}
+
+الفكرة الأصلية:
+"""
+${articleText}
+"""
+
+اكتب البرومبت النهائي فقط، دون شرح إضافي.`;
+    }
 
     const response = await fetch(
-      'https://api.groq.com/openai/v1/chat/completions',
+      "https://api.groq.com/openai/v1/chat/completions",
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
         },
         body: JSON.stringify({
-          model: 'openai/gpt-oss-120b',
-          max_tokens: 1000,
+          model: "openai/gpt-oss-120b",
+          max_tokens: 2000,
           messages: [
             {
-              role: 'user',
+              role: "user",
               content: instructionPrompt
             }
           ]
@@ -58,29 +80,33 @@ ${articleText}
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error('Groq API error:', errText);
+      console.error("Groq API error:", errText);
 
-      return res.status(response.status).json({
-        error: 'Groq API Error',
-        status: response.status,
+      return res.status(502).json({
+        error: "تعذر توليد المحتوى حاليًا",
         details: errText
       });
     }
 
     const data = await response.json();
-
     const generatedText =
-      (data.choices?.[0]?.message?.content || '').trim();
+      (data.choices?.[0]?.message?.content || "").trim();
+
+    if (!generatedText) {
+      return res.status(502).json({
+        error: "لم يُرجع الذكاء الاصطناعي محتوى. حاول مجددًا."
+      });
+    }
 
     return res.status(200).json({
       result: generatedText
     });
 
   } catch (err) {
-    console.error('Server error:', err);
+    console.error("Server error:", err);
 
     return res.status(500).json({
-      error: 'حدث خطأ في الخادم'
+      error: "حدث خطأ في الخادم"
     });
   }
 }
