@@ -149,14 +149,6 @@ body.high-contrast .container {
   border-color: #fff !important;
 }
 
-/* ==============================
-   Grayscale
-   ============================== */
-
-body.accessibility-grayscale {
-  filter: grayscale(100%);
-}
-
 /* لا نطبق التأثير على أداة إمكانية الوصول نفسها */
 .accessibility-widget {
   filter: none !important;
