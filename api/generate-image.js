@@ -82,13 +82,22 @@ module.exports = async (req, res) => {
       !data.success ||
       !data.result?.image
     ) {
+      const errorDetails = {
+        status: response.status,
+        errors: data.errors || [],
+        messages: data.messages || []
+      };
+
       console.error(
         "Cloudflare image API error:",
-        JSON.stringify(data.errors || [])
+        JSON.stringify(errorDetails)
       );
 
       return res.status(502).json({
-        error: "Image generation failed. Check server logs."
+        error: "Image generation failed",
+        cloudflareStatus: response.status,
+        details: data.errors || [],
+        messages: data.messages || []
       });
     }
 
@@ -96,7 +105,10 @@ module.exports = async (req, res) => {
       dataURI: `data:image/jpeg;base64,${data.result.image}`
     });
   } catch (error) {
-    console.error("Image API request failed:", error.message);
+    console.error(
+      "Image API request failed:",
+      error.message
+    );
 
     return res.status(502).json({
       error: "Could not connect to the image service"
