@@ -1,13 +1,9 @@
-
 module.exports = async (req, res) => {
   const allowedOrigin = "https://yimour-ai.github.io";
 
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, X-Image-Test-Secret"
-  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Vary", "Origin");
   res.setHeader("Cache-Control", "no-store");
 
@@ -15,28 +11,12 @@ module.exports = async (req, res) => {
     return res.status(204).end();
   }
 
-  if (
-    req.headers.origin &&
-    req.headers.origin !== allowedOrigin
-  ) {
-    return res.status(403).json({
-      error: "Origin not allowed"
-    });
+  if (req.headers.origin && req.headers.origin !== allowedOrigin) {
+    return res.status(403).json({ error: "Origin not allowed" });
   }
 
   if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Method not allowed"
-    });
-  }
-
-  const testSecret = process.env.IMAGE_TEST_SECRET;
-  const suppliedSecret = req.headers["x-image-test-secret"];
-
-  if (!testSecret || suppliedSecret !== testSecret) {
-    return res.status(401).json({
-      error: "Unauthorized"
-    });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const prompt =
@@ -55,7 +35,7 @@ module.exports = async (req, res) => {
 
   if (!accountId || !apiToken) {
     return res.status(500).json({
-      error: "Server configuration is incomplete"
+      error: "Cloudflare configuration is incomplete"
     });
   }
 
@@ -75,40 +55,48 @@ module.exports = async (req, res) => {
       }
     );
 
-    const data = await response.json();
+    const contentType = response.headers.get("content-type") || "";
+    let imageBase64 = "";
+    let imageType = "image/png";
 
-    if (
-      !response.ok ||
-      !data.success ||
-      !data.result?.image
-    ) {
-      const errorDetails = {
-        status: response.status,
-        errors: data.errors || [],
-        messages: data.messages || []
-      };
+    if (contentType.includes("application/json")) {
+      const data = await response.json();
 
-      console.error(
-        "Cloudflare image API error:",
-        JSON.stringify(errorDetails)
-      );
+      imageBase64 =
+        typeof data.result === "string"
+          ? data.result
+          : data.result?.image || "";
+
+      if (!response.ok || data.success === false || !imageBase64) {
+        console.error("Cloudflare error:", {
+          status: response.status,
+          errors: data.errors || []
+        });
+
+        return res.status(502).json({
+          error: "Image generation failed",
+          cloudflareStatus: response.status
+        });
+      }
+    } else if (response.ok && contentType.startsWith("image/")) {
+      const buffer = Buffer.from(await response.arrayBuffer());
+      imageBase64 = buffer.toString("base64");
+      imageType = contentType.split(";")[0];
+    } else {
+      console.error("Unexpected Cloudflare response:", response.status);
 
       return res.status(502).json({
-        error: "Image generation failed",
-        cloudflareStatus: response.status,
-        details: data.errors || [],
-        messages: data.messages || []
+        error: "Unexpected response from image service",
+        cloudflareStatus: response.status
       });
     }
 
     return res.status(200).json({
-      dataURI: `data:image/jpeg;base64,${data.result.image}`
+      dataURI: `data:${imageType};base64,${imageBase64}`
     });
+
   } catch (error) {
-    console.error(
-      "Image API request failed:",
-      error.message
-    );
+    console.error("Image API error:", error.message);
 
     return res.status(502).json({
       error: "Could not connect to the image service"
