@@ -31,6 +31,11 @@ module.exports = async (req, res) => {
   }
 
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  console.log("Account ID check:", {
+  exists: !!accountId,
+  length: accountId ? accountId.length : 0,
+  isHex32: /^[a-f0-9]{32}$/i.test(accountId || "")
+});
   const apiToken = process.env.CLOUDFLARE_API_TOKEN;
 
   if (!accountId || !apiToken) {
