@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="أنشئ صوراً بالذكاء الاصطناعي من وصفك النصي مباشرة داخل عالم الذكاء الاصطناعي.">
+  <title>مولد الصور بالذكاء الاصطناعي | عالم الذكاء الاصطناعي</title>
+  <link rel="canonical" href="https://yimour-ai.github.io/image-generator.html">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f4f6fb;
+      color: #20283a;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 720px;
+      margin: 35px auto;
+      padding: 24px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 24px #0000000d;
+    }
+    h1 { text-align: center; color: #254c9b; }
+    .intro { text-align: center; line-height: 1.8; color: #555; }
+    label { display: block; margin: 22px 0 9px; font-weight: bold; }
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      padding: 14px;
+      border: 1px solid #ccd3e0;
+      border-radius: 10px;
+      font: inherit;
+      resize: vertical;
+    }
+    button, .download {
+      display: block;
+      width: 100%;
+      margin-top: 15px;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #2856b6;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button:disabled { opacity: .6; cursor: wait; }
+    #status { text-align: center; margin: 18px 0; line-height: 1.7; }
+    #result { display: none; margin-top: 20px; }
+    #preview {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+    }
+    .download { background: #16834a; }
+    .note { color: #777; font-size: 13px; line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>مولد الصور بالذكاء الاصطناعي</h1>
+    <p class="intro">
+      اكتب وصف الصورة التي تريد إنشاءها، ودع الذكاء الاصطناعي يحول فكرتك إلى صورة.
+    </p>
+
+    <label for="prompt">صف الصورة التي تريد إنشاءها:</label>
+    <textarea id="prompt" maxlength="2048"
+      placeholder="مثال: منزل ريفي جميل وسط الطبيعة، أشجار خضراء، إضاءة شروق الشمس، تصوير واقعي..."></textarea>
+
+    <button id="generateBtn" type="button">إنشاء الصورة</button>
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <section id="result">
+      <img id="preview" alt="الصورة التي تم إنشاؤها بالذكاء الاصطناعي">
+      <a id="downloadBtn" class="download" download="yimour-ai-image.png">
+        تحميل الصورة
+      </a>
+    </section>
+
+    <p class="note">
+      قد يستغرق إنشاء الصورة بعض الوقت. كل عملية توليد قد تستهلك جزءاً من حصة خدمة توليد الصور.
+    </p>
+    <p style="text-align:center">
+      <a href="index.html">العودة إلى الصفحة الرئيسية</a>
+    </p>
+  </main>
+
+  <script>
+    const promptInput = document.getElementById("prompt");
+    const generateBtn = document.getElementById("generateBtn");
+    const statusText = document.getElementById("status");
+    const result = document.getElementById("result");
+    const preview = document.getElementById("preview");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    generateBtn.addEventListener("click", async () => {
+      const prompt = promptInput.value.trim();
+
+      if (!prompt) {
+        statusText.textContent = "اكتب وصف الصورة أولاً.";
+        return;
+      }
+
+      generateBtn.disabled = true;
+      generateBtn.textContent = "جارٍ إنشاء الصورة...";
+      statusText.textContent = "يرجى الانتظار، قد تستغرق العملية بعض الوقت.";
+      result.style.display = "none";
+
+      try {
+        const response = await fetch(
+          "https://yimour-ai-github-io.vercel.app/api/generate-image",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt })
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "تعذر إنشاء الصورة.");
+        }
+
+        if (!data.dataURI || !data.dataURI.startsWith("data:image/")) {
+          throw new Error("لم تصل صورة صالحة من خدمة التوليد.");
+        }
+
+        preview.src = data.dataURI;
+        downloadBtn.href = data.dataURI;
+        result.style.display = "block";
+        statusText.textContent = "تم إنشاء الصورة بنجاح!";
+      } catch (error) {
+        statusText.textContent = "حدث خطأ: " + error.message;
+      } finally {
+        generateBtn.disabled = false;
+        generateBtn.textContent = "إنشاء الصورة";
+      }
+    });
+  </script>
+</body>
+</html>
