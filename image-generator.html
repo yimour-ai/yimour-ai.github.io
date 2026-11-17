@@ -101,8 +101,29 @@
     const preview = document.getElementById("preview");
     const downloadBtn = document.getElementById("downloadBtn");
 
+    function getVisitorId() {
+      const key = "yimour_image_visitor_id";
+      let visitorId = localStorage.getItem(key);
+
+      if (!visitorId) {
+        if (crypto.randomUUID) {
+          visitorId = crypto.randomUUID();
+        } else {
+          visitorId = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+            const r = Math.random() * 16 | 0;
+            return (c === "x" ? r : (r & 3 | 8)).toString(16);
+          });
+        }
+
+        localStorage.setItem(key, visitorId);
+      }
+
+      return visitorId;
+    }
+
     generateBtn.addEventListener("click", async () => {
       const prompt = promptInput.value.trim();
+      const visitorId = getVisitorId();
 
       if (!prompt) {
         statusText.textContent = "اكتب وصف الصورة أولاً.";
@@ -120,7 +141,7 @@
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt })
+            body: JSON.stringify({ prompt, visitorId })
           }
         );
 
